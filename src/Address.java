@@ -29,5 +29,12 @@ public class Address {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public Address(String streetName, String town, String city, String description) {
+		StreetName = streetName;
+		this.town = town;
+		this.city = city;
+		this.description = description;
+	}
+	
 	
 }

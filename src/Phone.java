@@ -14,5 +14,10 @@ public class Phone {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	public Phone(String country_code, String number) {
+		this.country_code = country_code;
+		this.number = number;
+	}
+	
 	
 }
