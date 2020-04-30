@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-
 public class Food {
 	private String  food_name; 
 	private ArrayList<Restaurant>restaurant_list;  
 	private ArrayList<String> ingredients; 
 	private int price;
-	
 	public String getFood_name() {
 		return food_name;
 	}

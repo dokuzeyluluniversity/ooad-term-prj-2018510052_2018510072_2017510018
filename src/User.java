@@ -5,15 +5,13 @@ public abstract class User implements UserInterface {
 	private Address address; 
 	private Phone phone;
 	private String password;
-	
-	
-	
 	public User(String name, String surname, Address address, Phone phone) {
 		this.name = name;
 		this.surname = surname;
 		this.address = address;
 		this.phone = phone;
 	}
+	
 	public String getName() {
 		return name;
 	}

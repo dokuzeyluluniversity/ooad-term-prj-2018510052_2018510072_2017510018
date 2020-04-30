@@ -1,15 +1,13 @@
 import java.util.ArrayList;
-
 public class Customer extends User{
+	private int  ID_customer;
+	private static int count = 1; 
+	private ArrayList<String> orders;
 	public Customer(String name, String surname, Address address, Phone phone) {
 		super(name, surname, address, phone);
 		setID_customer(count);
 		// TODO Auto-generated constructor stub
 	}
-	private int  ID_customer;
-	private static int count = 1; 
-	private ArrayList<String> orders;
-	
 	public int getID_customer() {
 		return ID_customer;
 	}
@@ -36,15 +34,15 @@ public class Customer extends User{
 	@Override
 	public String toString() {
 		return "Customer [ID_customer=" + ID_customer + ", orders=" + orders + ", getName()=" + getName()
-				+ ", getSurname()=" + getSurname() + ", getAddress()=" + getAddress() + ", getPhone()=" + getPhone()
-				+ "]";
+		+ ", getSurname()=" + getSurname() + ", getAddress()=" + getAddress() + ", getPhone()=" + getPhone()
+		+ "]";
 	}
 	public void CreateCustomer(Customer c, ArrayList<Customer> a) {
 		a.add(c);
 		count++;
 	}
 	public void Order (Restaurant rest, Food food, Customer c) {
-		
+
 		//take the budget from the user 
 		//check if the restaurant is full or not
 		if(rest.getCustomerqueue().size()<2) {//it is not 2 just for testing
@@ -54,9 +52,9 @@ public class Customer extends User{
 		else {
 			//it will be recursive order() will be called again.
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 }

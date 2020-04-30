@@ -1,16 +1,12 @@
 import java.util.ArrayList;
-
 public class Admin extends User{
+	private int  ID_admin;
+	private static int count = 1 ;
 	public Admin(String name, String surname, Address address, Phone phone) {
 		super(name, surname, address, phone);
 		setID_admin(count);
 		// TODO Auto-generated constructor stub
 	}
-	private int  ID_admin;
-	private static int count = 1 ;
-	
-	
-	
 	public int getID_admin() {
 		return ID_admin;
 	}
@@ -23,8 +19,6 @@ public class Admin extends User{
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
-
 	@Override
 	public String toString() {
 		return "Admin [ID_admin=" + ID_admin + ", getName()=" + getName() + ", getSurname()=" + getSurname()

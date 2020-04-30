@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Queue;
-
 public class Restaurant {
 	private String  restaurant_name;
 	private String ship_min;
@@ -8,8 +7,6 @@ public class Restaurant {
 	private Phone phone;
 	private ArrayList<Food> food; 
 	private Queue<Customer>customerqueue ;
-	
-	
 	public Restaurant(String restaurant_name, String ship_min, Address address, Phone phone, ArrayList<Food> food,
 			Queue<Customer> customerqueue) {
 		this.restaurant_name = restaurant_name;
@@ -58,7 +55,6 @@ public class Restaurant {
 	public void addFood(Food f) {
 		food.add(f);
 	}
-	
 	public void removeFood(Food f) {
 		for (int i = 0; i < food.size(); i++) {
 			if(food.get(i).getFood_name().equals(f.getFood_name())) {
@@ -67,7 +63,6 @@ public class Restaurant {
 			}
 		}
 	}
-	
 	public void displayQueue() {
 		for (int i = 0; i < customerqueue.size(); i++) {
 			System.out.println(customerqueue.toString());
