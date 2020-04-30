@@ -58,7 +58,6 @@ public class Restaurant {
 	public void addFood(Food f) {
 		food.add(f);
 	}
-	
 	public void removeFood(Food f) {
 		for (int i = 0; i < food.size(); i++) {
 			if(food.get(i).getFood_name().equals(f.getFood_name())) {
