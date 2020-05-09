@@ -5,16 +5,16 @@ public class Restaurant {
 	private String ship_min;
 	private Address address ;
 	private Phone phone;
-	private ArrayList<Food> food; 
-	private Queue<Customer>customerqueue ;
-	public Restaurant(String restaurant_name, String ship_min, Address address, Phone phone, ArrayList<Food> food,
-			Queue<Customer> customerqueue) {
+	private ArrayList<Food> food = new ArrayList<Food>(); 
+	private BoundedQueue customerQueue = new BoundedQueue();
+	private boolean shutDown = false;
+	public Restaurant(String restaurant_name, String ship_min, Address address, Phone phone) {
 		this.restaurant_name = restaurant_name;
 		this.ship_min = ship_min;
 		this.address = address;
 		this.phone = phone;
 		this.food = food;
-		this.customerqueue = customerqueue;
+		this.customerQueue = customerQueue;
 	}
 	public String getRestaurant_name() {
 		return restaurant_name;
@@ -46,11 +46,11 @@ public class Restaurant {
 	public void setFood(ArrayList<Food> food) {
 		this.food = food;
 	}
-	public Queue getCustomerqueue() {
-		return customerqueue;
+	public BoundedQueue getCustomerqueue() {
+		return customerQueue;
 	}
-	public void setCustomerqueue(Queue customerqueue) {
-		this.customerqueue = customerqueue;
+	public void setCustomerqueue(Customer customer) throws QueueFull {
+		this.customerQueue.enqueue(customer);
 	}
 	public void addFood(Food f) {
 		food.add(f);
@@ -64,14 +64,24 @@ public class Restaurant {
 		}
 	}
 	public void displayQueue() {
-		for (int i = 0; i < customerqueue.size(); i++) {
-			System.out.println(customerqueue.toString());
-		}
+		System.out.println(customerQueue.toString());
 	}
 	@Override
 	public String toString() {
-		return "Restaurant [restaurant_name=" + restaurant_name + ", ship_min=" + ship_min + ", address=" + address
-				+ ", phone=" + phone + ", food=" + food + ", customerqueue=" + customerqueue + "]";
+		return "restaurant_name=" + restaurant_name + ", address=" + address.toString()
+				+ ", phone=" + phone.toString();
+	}
+	
+	public void setRestaurant(String restaurant_name, Address address, Phone phone) {
+		this.restaurant_name = restaurant_name;
+		this.address = address;
+		this.phone = phone;
+	}
+	public boolean isShutDown() {
+		return shutDown;
+	}
+	public void setShutDown(boolean shutDown) {
+		this.shutDown = shutDown;
 	}
 	
 	

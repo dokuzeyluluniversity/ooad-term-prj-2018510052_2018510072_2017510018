@@ -18,6 +18,10 @@ public class Phone {
 		this.country_code = country_code;
 		this.number = number;
 	}
+	@Override
+	public String toString() {
+		return "Phone [country_code=" + country_code + ", number=" + number + "]";
+	}
 	
 	
 }

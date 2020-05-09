@@ -1,9 +1,10 @@
+import java.io.IOException;
 
 public class test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws QueueFull, IOException, QueueEmpty {
 		// TODO Auto-generated method stub
-		man a = new man();
+		Management m = new Management();
 	}
 
 }

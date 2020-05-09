@@ -1,15 +1,16 @@
 
-public abstract class User implements UserInterface {
+public abstract class User implements UserInterface{
 	private String  name;
 	private String surname;
 	private Address address; 
 	private Phone phone;
 	private String password;
-	public User(String name, String surname, Address address, Phone phone) {
+	public User(String name, String surname, Address address, Phone phone, String password) {
 		this.name = name;
 		this.surname = surname;
 		this.address = address;
 		this.phone = phone;
+		this.password =password;
 	}
 	
 	public String getName() {
@@ -45,6 +46,14 @@ public abstract class User implements UserInterface {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", surname=" + surname + ", address=" + address + ", phone=" + phone;
+	}
+	
+	public void setUser(String name, String surname, Address address, Phone phone, String password) {
+		this.name = name;
+		this.surname = surname;
+		this.address = address;
+		this.phone = phone;
+		this.password =password;
 	}
 	
 	

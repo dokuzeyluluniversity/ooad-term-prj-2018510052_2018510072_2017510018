@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+
 public class Customer extends User{
 	private int  ID_customer;
 	private static int count = 1; 
 	private ArrayList<String> orders;
-	public Customer(String name, String surname, Address address, Phone phone) {
-		super(name, surname, address, phone);
+	public Customer(String name, String surname, Address address, Phone phone, String password) {
+		super(name, surname, address, phone, password);
 		setID_customer(count);
 		// TODO Auto-generated constructor stub
 	}
@@ -42,19 +43,7 @@ public class Customer extends User{
 		count++;
 	}
 	public void Order (Restaurant rest, Food food, Customer c) {
-
-		//take the budget from the user 
-		//check if the restaurant is full or not
-		if(rest.getCustomerqueue().size()<2) {//it is not 2 just for testing
-			orders.add(food.getFood_name() + " " +rest.getRestaurant_name());
-			rest.getCustomerqueue().add(c.getID_customer()+ " food:"+food.getFood_name());
-		}
-		else {
-			//it will be recursive order() will be called again.
-		}
-
-
-
+		
 	}
 
 }

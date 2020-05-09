@@ -35,6 +35,11 @@ public class Address {
 		this.city = city;
 		this.description = description;
 	}
+	@Override
+	public String toString() {
+		return "Address [StreetName=" + StreetName + ", town=" + town + ", city=" + city + ", description="
+				+ description + "]";
+	}
 	
 	
 }

@@ -1,11 +1,21 @@
 import java.util.ArrayList;
+
 public class Admin extends User{
 	private int  ID_admin;
 	private static int count = 1 ;
-	public Admin(String name, String surname, Address address, Phone phone) {
-		super(name, surname, address, phone);
+private Restaurant restaurant;
+	
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	public Admin(String name, String surname, Address address, Phone phone, String password) {
+		super(name, surname, address, phone,password);
 		setID_admin(count);
-		// TODO Auto-generated constructor stub
+		this.restaurant = new Restaurant(String.valueOf(count),"",new Address("","","",""),new Phone("",""));
+		
 	}
 	public int getID_admin() {
 		return ID_admin;
@@ -21,8 +31,8 @@ public class Admin extends User{
 	}
 	@Override
 	public String toString() {
-		return "Admin [ID_admin=" + ID_admin + ", getName()=" + getName() + ", getSurname()=" + getSurname()
-				+ ", getAddress()=" + getAddress() + ", getPhone()=" + getPhone() + "]";
+		return "getName()=" + getName() + ", getSurname()=" + getSurname()
+				+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
 	}
 	public void createAdmin(Admin ad, ArrayList<Admin> a) {
 		a.add(ad);

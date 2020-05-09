@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class Food {
 	private String  food_name; 
 	private ArrayList<Restaurant>restaurant_list;  
-	private ArrayList<String> ingredients; 
+	private ArrayList<String> ingredients =new ArrayList<String>(); 
 	private int price;
 	public String getFood_name() {
 		return food_name;
@@ -30,16 +30,21 @@ public class Food {
 	}
 	@Override
 	public String toString() {
-		return "Food [food_name=" + food_name + ", restaurant_list=" + restaurant_list + ", ingredients=" + ingredients
+		String restName = "";
+		for (int i = 0; i < restaurant_list.size(); i++) {
+			restName+=restaurant_list.get(i).getRestaurant_name()+" ";
+		}
+		return "Food [food_name=" + food_name + ", restaurant_list=" + restName + ", ingredients=" + ingredients
 				+ ", price=" + price + "]";
 	}
-	public Food(String food_name, ArrayList<Restaurant> restaurant_list, ArrayList<String> ingredients, int price) {
+	public Food(String food_name, String ingredients, int price, Restaurant restaurant) {
 		this.food_name = food_name;
-		this.restaurant_list = restaurant_list;
-		this.ingredients = ingredients;
+		addRestaurant(restaurant);
+		this.ingredients.add(ingredients);
 		this.price = price;
 	}
 	public void addRestaurant(Restaurant rest) {
+		restaurant_list = new ArrayList<Restaurant>();
 		restaurant_list.add(rest);
 	}
 }

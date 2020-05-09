@@ -55,16 +55,21 @@ public class BoundedQueue implements IQueue {
 	{
 		int size = (rear - front + contents.length) % contents.length;
 		
-		String retString = "<" + size + ">\n<font:\n";
+		String retString = "";
 		
 		for(int i=front; i!= rear; i= (i+1) % contents.length)
 		{
 			retString += contents[i] + "\n";
 		}
 		
-		retString += ":rear>";
+		retString += "";
 		
 		return retString;
+	}
+
+	public int size() {
+		// TODO Auto-generated method stub
+		return rear-1;
 	}
 	
 	
