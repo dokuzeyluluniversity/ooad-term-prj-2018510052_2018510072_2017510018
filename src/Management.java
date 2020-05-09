@@ -39,42 +39,67 @@ public class Management {
 		ad.getRestaurant().getCustomerqueue().enqueue(cd2.toString());
 		ad.getRestaurant().getCustomerqueue().enqueue(cd3.toString());
 		//Customer list will be created like adminlist arraylist
-		for (int i = 0; i < cList.size(); i++) {
-			System.out.println(cList.get(i));
-		}
-		Menu();
+				Menu();
 
 
 	}
-	public void keepdata(String customer,String Admin) throws IOException {
+	public void keepdata(String User) throws IOException {
 
-		File file=new File("Customer.txt");  ;
-		FileWriter fileWriter = new FileWriter(file, false);
-		BufferedWriter bWriter = new BufferedWriter(fileWriter);
+		File file =new File("Orders.txt");
+		File rest =new File("Restaurants.txt");
+		File cust =new File("Customers.txt");
+		
+		FileWriter fw;
+        BufferedReader br;
+        BufferedWriter bw;
+        boolean no=false;
+        String line;
+        String data="";
+        String lessonPath=User;
+		
+		
+		 try {
+			    if(!file.exists()){
+			        fw = new FileWriter(file);
+			        bw = new BufferedWriter(fw);
+			        bw.write(lessonPath);
+			        bw.flush();
+			        bw.close();
 
-		bWriter.write(customer);
+			    }else{
 
-		if (file.exists()) {
-
-			Scanner rd=new Scanner(file);
-			while(rd.hasNextLine()) {
-				//	String str=rd.nextLine();
-				//	String split[]=str.split(",");
-				bWriter.write(customer);
+			        br = new BufferedReader(new FileReader(file));
 
 
-			}
-		}
+			        while((line =br.readLine()) !=null){
+			           if(!no){
+			           data=line;
+			           no=true;
+			           }else{
+			               data = data+line;
+			           }   
+			       }
+			        bw = new BufferedWriter(new FileWriter(file));
+			        bw.write(lessonPath+"\n"+data);
+			        bw.flush();
+			        bw.close();
 
+			    }     
 
+			    } catch (Exception ex) {
+			        ex.printStackTrace();
+			    }
+			
+	
 
+	
 
 
 	}
 
 
 
-	public void Menu( ) throws IOException, QueueEmpty {
+	public void Menu( ) throws IOException, QueueEmpty, QueueFull {
 		Scanner s = new Scanner(System.in);
 		Scanner sn = new Scanner(System.in);//for strings
 		System.out.println("1- admin\n2- user\n3- sign up");
@@ -190,7 +215,7 @@ public class Management {
 					System.exit(0);
 				}
 				else System.out.println("Invalid input!Try Again!");
-			} while (answer!=6);
+			} while (answer!=8);
 
 		}
 		else if( answer == 3) {//sign up
@@ -200,7 +225,7 @@ public class Management {
 			if(answer == 1){//admin info enter
 				System.out.print("name,surname,phone,password(leave only a comma between them)");
 				info = sn.nextLine();
-				keepdata("",info);
+			
 				String[] split = info.split(",");
 				Admin newAdmin = new Admin(split[0],split[1],new Address("","","",""),new Phone(split[2],""),split[3]);
 				newAdmin.createAdmin(newAdmin, aList);System.out.println(newAdmin.toString());
@@ -209,7 +234,7 @@ public class Management {
 			else {//customer info enter
 				System.out.print("name,surname,phone,password(leave only a comma between them)");
 				info = sn.nextLine();
-				keepdata(info,"");
+				
 				String[] split = info.split(",");
 				Customer newCustomer = new Customer(split[0],split[1],new Address("","","",""),new Phone(split[2],""),split[3]);
 				newCustomer.CreateCustomer(newCustomer, cList);System.out.println(newCustomer.toString());
@@ -259,10 +284,17 @@ public class Management {
 					System.out.println(cList.get(customerId).toString());
 
 				}
-				else if(answer == 2) {//give order
+				else if(answer == 2 ) {//give order
+					cList.get(customerId).Order(aList, cList, customerId);
 
 				}
-				else if(answer == 3) {//display all orders
+				else if(answer == 3 ) {//display orders
+					for (int i = 0; i < cList.get(customerId).getOrders().size(); i++) {
+
+						System.out.println(cList.get(customerId).getOrders().get(i));
+
+					}
+
 
 				}
 				else if(answer == 4) {//display all food
@@ -277,7 +309,7 @@ public class Management {
 					System.exit(0);
 				}
 				else System.out.println("Invalid input!Try Again!");
-			} while (answer!=4);
+			} while (answer!=5);
 
 		}
 	}

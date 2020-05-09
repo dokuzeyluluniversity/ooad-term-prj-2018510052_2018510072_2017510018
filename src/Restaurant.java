@@ -83,6 +83,20 @@ public class Restaurant {
 	public void setShutDown(boolean shutDown) {
 		this.shutDown = shutDown;
 	}
+	public Food FindFood(Restaurant r ,String s)
+	{ 
+		
+		for (int i = 0; i < r.getFood().size(); i++) {
+			
+			if(s.equals(r.getFood().get(i).getFood_name()))
+			{
+				return r.getFood().get(i);
+			}
+			
+		}
+		return null;
+	}
+	
 	
 	
 }
