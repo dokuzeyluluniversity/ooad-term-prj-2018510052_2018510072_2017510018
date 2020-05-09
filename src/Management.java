@@ -110,12 +110,13 @@ public class Management {
 		BufferedReader br2 = new BufferedReader(new FileReader(f)); 
 
 		String st1; 
-		while ((st1 = br.readLine()) != null) {
+		while ((st1 = br2.readLine()) != null) {
 			
 			if(!st1.equals(""))
 			{
 				String sp[] =st1.split(",");
 				cList.add(new Customer(sp[0],sp[1],new Address("","","",""),new Phone("",sp[2]),sp[3]));
+				System.out.println(cList.get(cList.size()-1));
 				
 			}
 			
@@ -225,7 +226,7 @@ public class Management {
 				else if(answer == 4 && !aList.get(adminId).getRestaurant().isShutDown()) {//display customers
 					aList.get(adminId).getRestaurant().displayQueue();
 				}
-				else if(answer == 5 && !aList.get(adminId).getRestaurant().isShutDown()){
+				else if(answer == 5 && !aList.get(adminId).getRestaurant().isShutDown()){//shut down !!
 					aList.get(adminId).getRestaurant().setShutDown(true);
 					System.out.println("Restaurant is now closed!");
 				}

@@ -62,7 +62,7 @@ public class Customer extends User{
 					if(aList.get(i).getRestaurant().getFood().get(j).getFood_name().equals(s2))
 					{
 
-						if(Integer.parseInt(s1) >= aList.get(i).getRestaurant().getFood().get(j).getPrice())
+						if(Integer.parseInt(s1) >= aList.get(i).getRestaurant().getFood().get(j).getPrice() && !aList.get(i).getRestaurant().isShutDown())
 						{
 							budgetflag=true;
 
@@ -79,7 +79,7 @@ public class Customer extends User{
 			System.out.println("select a restaurant : ");
 			choise=s3.nextLine();
 			for (int i = 0; i < aList.size(); i++) {
-				if(choise.equals(aList.get(i).getRestaurant().getRestaurant_name()))
+				if(choise.equals(aList.get(i).getRestaurant().getRestaurant_name())&& !aList.get(i).getRestaurant().isShutDown())
 				{
 					aList.get(i).getRestaurant().setCustomerqueue(cList.get(CustomerId));
 					cList.get(CustomerId).setOrders(aList.get(i).getRestaurant().FindFood(aList.get(i).getRestaurant(), s2));
