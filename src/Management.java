@@ -16,7 +16,7 @@ public class Management {
 	ArrayList<Food> fList = new ArrayList<Food>();
 	Management() throws QueueFull, IOException, QueueEmpty{
 		//adding admin into the admin arraylist
-		fList.add(new Food("pizza", "sucuk-domates", 30, new Restaurant("konyalý", "30",new Address("sstr","town","city","desc"),new Phone("5684638","234"))));
+		/*fList.add(new Food("pizza", "sucuk-domates", 30, new Restaurant("konyalý", "30",new Address("sstr","town","city","desc"),new Phone("5684638","234"))));
 		fList.add(new Food("kavurma", "yumurta-domates", 30, new Restaurant("konyalý", "30",new Address("sstr","town","city","desc"),new Phone("5684638","234"))));
 		fList.add(new Food("mantý", "kýyma-domates", 30, new Restaurant("konyalý", "30",new Address("sstr","town","city","desc"),new Phone("5684638","234"))));
 		fList.add(new Food("lahmacun", "kýyma-çeþni-domates", 30, new Restaurant("konyalý", "30",new Address("sstr","town","city","desc"),new Phone("5684638","234"))));
@@ -37,78 +37,108 @@ public class Management {
 		cd.CreateCustomer(cd3, cList);
 		ad.getRestaurant().getCustomerqueue().enqueue(cd.toString());
 		ad.getRestaurant().getCustomerqueue().enqueue(cd2.toString());
-		ad.getRestaurant().getCustomerqueue().enqueue(cd3.toString());
+		ad.getRestaurant().getCustomerqueue().enqueue(cd3.toString());*/
 		//Customer list will be created like adminlist arraylist
-				Menu();
+		boolean loop=false;
+		takeData();
+		do {
+
+			Menu();
+		}while(!loop);
+
 
 
 	}
-	public void keepdata(String User) throws IOException {
-
-		File file =new File("Orders.txt");
-		File rest =new File("Restaurants.txt");
-		File cust =new File("Customers.txt");
-		
-		FileWriter fw;
-        BufferedReader br;
-        BufferedWriter bw;
-        boolean no=false;
-        String line;
-        String data="";
-        String lessonPath=User;
-		
-		
-		 try {
-			    if(!file.exists()){
-			        fw = new FileWriter(file);
-			        bw = new BufferedWriter(fw);
-			        bw.write(lessonPath);
-			        bw.flush();
-			        bw.close();
-
-			    }else{
-
-			        br = new BufferedReader(new FileReader(file));
-
-
-			        while((line =br.readLine()) !=null){
-			           if(!no){
-			           data=line;
-			           no=true;
-			           }else{
-			               data = data+line;
-			           }   
-			       }
-			        bw = new BufferedWriter(new FileWriter(file));
-			        bw.write(lessonPath+"\n"+data);
-			        bw.flush();
-			        bw.close();
-
-			    }     
-
-			    } catch (Exception ex) {
-			        ex.printStackTrace();
-			    }
+	public void selectfile(String User,int i) throws IOException
+	{
+		if(i==1)
+		{
+			File file =new File("Admin.txt");//1
+			writeFile(User,1,file);
 			
-	
+		}
+		else if(i==2)
+		{    File cust =new File("Customers.txt");//2
+		writeFile(User,2,cust);
+		
+		}else if(i==3)
+		{   File ord =new File("Ords.txt");
+		writeFile(User,3,ord);
+		
+		}
+		
+	}
+	public void writeFile(String text,int i,File fileName) throws IOException {
 
-	
 
+		BufferedWriter writer = new BufferedWriter(
+				new FileWriter(fileName, true)  //Set true for append mode
+				);  
+		writer.newLine();   //Add new line
+		writer.write(text);
+		writer.close();
+	}
+
+
+	public void takeData() throws IOException
+	{
+
+		File f =new File("Admin.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
+		BufferedReader br = new BufferedReader(new FileReader(f)); 
+
+		String st; 
+		while ((st = br.readLine()) != null) {
+			if(!st.equals(""))
+			{
+				
+				String sp[] =st.split(",");
+				aList.add(new Admin(sp[0],sp[1],new Address("","","",""),new Phone("",sp[2]),sp[3]));
+				
+			}
+			
+
+		}
+		f =new File("Customers.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
+		BufferedReader br2 = new BufferedReader(new FileReader(f)); 
+
+		String st1; 
+		while ((st1 = br.readLine()) != null) {
+			
+			if(!st1.equals(""))
+			{
+				String sp[] =st1.split(",");
+				cList.add(new Customer(sp[0],sp[1],new Address("","","",""),new Phone("",sp[2]),sp[3]));
+				
+			}
+			
+
+		}
+		
+		
 
 	}
 
 
 
-	public void Menu( ) throws IOException, QueueEmpty, QueueFull {
+	public boolean Menu( ) throws IOException, QueueEmpty, QueueFull {
 		Scanner s = new Scanner(System.in);
 		Scanner sn = new Scanner(System.in);//for strings
-		System.out.println("1- admin\n2- user\n3- sign up");
+		System.out.println("1- admin\n2- user\n3- sign up \n4-Exit");
 		int answer = s.nextInt();
 		if(answer == 1) {//admin
 			boolean enter = false;
 			int adminId = 0;
 			do {
 				System.out.print("phone: ");
+
 				String phone = s.next();
 
 				System.out.print("password: ");
@@ -212,7 +242,7 @@ public class Management {
 					aList.get(adminId).getRestaurant().getCustomerqueue().dequeue();
 				}
 				else if(answer == 8) {
-					System.exit(0);
+					return true;
 				}
 				else System.out.println("Invalid input!Try Again!");
 			} while (answer!=8);
@@ -225,23 +255,25 @@ public class Management {
 			if(answer == 1){//admin info enter
 				System.out.print("name,surname,phone,password(leave only a comma between them)");
 				info = sn.nextLine();
-			
+				selectfile(info,1);
 				String[] split = info.split(",");
-				Admin newAdmin = new Admin(split[0],split[1],new Address("","","",""),new Phone(split[2],""),split[3]);
-				newAdmin.createAdmin(newAdmin, aList);System.out.println(newAdmin.toString());
+				Admin newAdmin = new Admin(split[0],split[1],new Address("","","",""),new Phone("",split[2]),split[3]);
+				newAdmin.createAdmin(newAdmin, aList);
+				System.out.println(newAdmin.toString());
 
 			}
 			else {//customer info enter
 				System.out.print("name,surname,phone,password(leave only a comma between them)");
 				info = sn.nextLine();
-				
+
+				selectfile(info,2);
 				String[] split = info.split(",");
-				Customer newCustomer = new Customer(split[0],split[1],new Address("","","",""),new Phone(split[2],""),split[3]);
+				Customer newCustomer = new Customer(split[0],split[1],new Address("","","",""),new Phone("",split[2]),split[3]);
 				newCustomer.CreateCustomer(newCustomer, cList);System.out.println(newCustomer.toString());
 
 			}
 		}
-		else {//customer
+		else if(answer==2) {//customer
 			boolean enter = false;
 			int customerId = 0;
 			do {
@@ -306,12 +338,20 @@ public class Management {
 					}
 				}
 				else if(answer == 5) {
-					System.exit(0);
+					
+					return true;
+					
 				}
 				else System.out.println("Invalid input!Try Again!");
 			} while (answer!=5);
+			
+			
 
 		}
+		else {
+			System.exit(0);
+		}
+		return false;
 	}
 
 
