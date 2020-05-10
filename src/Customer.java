@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Customer extends User{
 	private int  ID_customer;
 	private static int count = 1; 
@@ -48,9 +47,9 @@ public class Customer extends User{
 		Scanner sn =new Scanner(System.in);
 
 		do{
-			System.out.print("pls enter your budget : " );
+			System.out.print("Please enter your budget : " );
 			String s1 =sn.next();
-			System.out.print("what would you like to eat ? : " );
+			System.out.print("What would you like to eat ? : " );
 			String s2 =sn.next();
 			Scanner s3=new Scanner(System.in);
 			String  choise="";
@@ -67,7 +66,7 @@ public class Customer extends User{
 							budgetflag=true;
 
 
-							System.out.println("rest name : "+aList.get(i).getRestaurant().getRestaurant_name());
+							System.out.println("Restaurant name : "+aList.get(i).getRestaurant().getRestaurant_name());
 
 						}
 
@@ -76,7 +75,7 @@ public class Customer extends User{
 				}
 
 			}
-			System.out.println("select a restaurant : ");
+			System.out.println("Select a restaurant : ");
 			choise=s3.nextLine();
 			for (int i = 0; i < aList.size(); i++) {
 				if(choise.equals(aList.get(i).getRestaurant().getRestaurant_name())&& !aList.get(i).getRestaurant().isShutDown())
@@ -86,17 +85,15 @@ public class Customer extends User{
 					System.out.println("YOUR ORDER IS COMPLETED ! " +"restaurant = "+aList.get(i).getRestaurant().getRestaurant_name());
 					aList.get(i).getRestaurant().displayQueue();
 				}
-
 			}
 
 			if(!budgetflag)
 			{
-				System.out.println(" ENTER BUDGET AGAIN .");
+				System.out.println(" ENTER BUDGET AGAIN!");
 
 			}
 		}while(!budgetflag);
 
 	}
-
 
 }

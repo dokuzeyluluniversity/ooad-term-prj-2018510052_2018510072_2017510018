@@ -71,7 +71,6 @@ public class Restaurant {
 		return "restaurant_name=" + restaurant_name + ", address=" + address.toString()
 				+ ", phone=" + phone.toString();
 	}
-	
 	public void setRestaurant(String restaurant_name, Address address, Phone phone) {
 		this.restaurant_name = restaurant_name;
 		this.address = address;

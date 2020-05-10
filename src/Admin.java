@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Admin extends User{
 	private int  ID_admin;
 	private static int count = 1 ;
-private Restaurant restaurant;
-	
+	private Restaurant restaurant;
+
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
@@ -15,7 +15,7 @@ private Restaurant restaurant;
 		super(name, surname, address, phone,password);
 		setID_admin(count);
 		this.restaurant = new Restaurant(String.valueOf(count),"",new Address("","","",""),new Phone("",""));
-		
+
 	}
 	public int getID_admin() {
 		return ID_admin;
@@ -32,13 +32,13 @@ private Restaurant restaurant;
 	@Override
 	public String toString() {
 		return "getName()=" + getName() + ", getSurname()=" + getSurname()
-				+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
+		+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
 	}
 	public void createAdmin(Admin ad, ArrayList<Admin> a) {
 		a.add(ad);
 		count++;
 	}
-	
-	
-	
+
+
+
 }
