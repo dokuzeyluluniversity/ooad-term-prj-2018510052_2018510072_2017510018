@@ -17,6 +17,8 @@ public class Menu extends JFrame {
 
 	private JFrame frame;
 	private JRadioButton rbtnsetinfo;
+	private JRadioButton rbtnOrder;
+	private JRadioButton rbtnDisplayorders;
 	private JRadioButton rbtnDisplayAllP;
 	private JRadioButton rbtnDisplayAllS;
 	private JRadioButton rbtnSearch;
@@ -46,13 +48,13 @@ public class Menu extends JFrame {
 
 		////////CUSTOMER
 		if(flag) {
-			rbtnDisplayAllP = new JRadioButton("Give Order");
-			rbtnDisplayAllP.setBounds(60, 77, 323, 23);
-			frame.getContentPane().add(rbtnDisplayAllP);
+			rbtnOrder = new JRadioButton("Give Order");
+			rbtnOrder.setBounds(60, 77, 323, 23);
+			frame.getContentPane().add(rbtnOrder);
 			//////budget gircek, istediði food girilcek  restaurantlar sýralýncak
-			rbtnDisplayAllS = new JRadioButton("Display All Orders");
-			rbtnDisplayAllS.setBounds(60, 103, 213, 23);
-			frame.getContentPane().add(rbtnDisplayAllS);
+			rbtnDisplayorders = new JRadioButton("Display All Orders");
+			rbtnDisplayorders.setBounds(60, 103, 213, 23);
+			frame.getContentPane().add(rbtnDisplayorders);
 
 		}////admin
 		else {
@@ -80,6 +82,8 @@ public class Menu extends JFrame {
 
 		ButtonGroup btnG = new ButtonGroup();
 		btnG.add(rbtnsetinfo);
+		btnG.add(rbtnDisplayorders);
+		btnG.add(rbtnOrder);
 		btnG.add(rbtnDisplayAllP);
 		btnG.add(rbtnDisplayAllS);
 		btnG.add(rbtnSearch);
@@ -91,12 +95,25 @@ public class Menu extends JFrame {
 			{
 				if (rbtnsetinfo.isSelected())
 				{
-					Framesmenu f=new Framesmenu();
+					CustomerFrames cf=new CustomerFrames();
+					cf.SetCustomerInfo();
+					cf.getSetCustomerInfo().setVisible(true);
 				
 					//f.SetInformationAdmin();
-					f.getAdmin().setVisible(true);
+					//f.getAdmin().setVisible(true);
 					frame.setVisible(false);
 				}
+				else if(rbtnOrder.isSelected())
+				{
+					CustomerFrames cf=new CustomerFrames();
+					cf.GiveOrder();
+					cf.getGiveOrder().setVisible(true);
+					frame.setVisible(false);
+					
+				
+	
+				}
+				
 
 			}
 		});
