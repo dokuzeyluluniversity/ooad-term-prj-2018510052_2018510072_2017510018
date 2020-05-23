@@ -34,13 +34,21 @@ public class Customer extends User{
 	}
 	@Override
 	public String toString() {
-		return "Customer [ID_customer=" + ID_customer + ", orders=" + orders + ", getName()=" + getName()
-		+ ", getSurname()=" + getSurname() + ", getAddress()=" + getAddress() + ", getPhone()=" + getPhone()
-		+ "]";
+		return "orders=" + orders + "-" + getName() + "-" + getSurname() + "-" + getPhone()+ "-" + getAddress() ;
 	}
 	public void CreateCustomer(Customer c, ArrayList<Customer> a) {
 		a.add(c);
 		count++;
+	}
+	public String getCurrentOrderedFood(Restaurant r) {
+		String s= "";
+		for (int i = 0; i < orders.size(); i++) {
+			for (int j = 0; j < orders.get(i).getRestaurant_list().size(); j++) {
+				if(orders.get(i).getRestaurant_list().get(j).getRestaurant_name().equals(r.getRestaurant_name()))
+					s= orders.get(i).toString();
+			}
+		}
+		return s + "-" +getName() + "-" + getSurname() + "-" + getPhone()+ "-" + getAddress();
 	}
 	public void Order (ArrayList<Admin> aList,ArrayList<Customer> cList,int CustomerId ) throws QueueFull {
 		boolean budgetflag=false;

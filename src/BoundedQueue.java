@@ -69,7 +69,7 @@ public class BoundedQueue implements IQueue {
 
 	public int size() {
 		// TODO Auto-generated method stub
-		return rear-1;
+		return rear;
 	}
 	
 	

@@ -20,7 +20,7 @@ public class Phone {
 	}
 	@Override
 	public String toString() {
-		return "Phone [country_code=" + country_code + ", number=" + number + "]";
+		return country_code + "," + number;
 	}
 	
 	

@@ -9,7 +9,10 @@ public class Admin extends User{
 		return restaurant;
 	}
 	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+		this.restaurant.setAddress(restaurant.getAddress());
+		this.restaurant.setPhone(restaurant.getPhone());
+		this.restaurant.setRestaurant_name(restaurant.getRestaurant_name());
+		this.restaurant.setShutDown(restaurant.isShutDown());
 	}
 	public Admin(String name, String surname, Address address, Phone phone, String password) {
 		super(name, surname, address, phone,password);

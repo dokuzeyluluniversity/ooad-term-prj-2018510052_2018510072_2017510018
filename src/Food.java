@@ -34,8 +34,7 @@ public class Food {
 		for (int i = 0; i < restaurant_list.size(); i++) {
 			restName+=restaurant_list.get(i).getRestaurant_name()+" ";
 		}
-		return "Food [food_name=" + food_name + ", restaurant_list=" + restName + ", ingredients=" + ingredients
-				+ ", price=" + price + "]";
+		return food_name  + "-" + ingredients + "-" + price+ "-" + restName;
 	}
 	public Food(String food_name, String ingredients, int price, Restaurant restaurant) {
 		this.food_name = food_name;

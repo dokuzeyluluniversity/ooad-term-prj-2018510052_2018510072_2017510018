@@ -11,21 +11,20 @@ import java.util.Scanner;
 import org.omg.CORBA.REBIND;
 
 public class Management {
-	ArrayList<Admin> aList = new ArrayList<Admin>();
+	public ArrayList<Admin> aList = new ArrayList<Admin>();
 	ArrayList<Customer> cList = new ArrayList<Customer>();
 	ArrayList<Food> fList = new ArrayList<Food>();
 	Management() throws QueueFull, IOException, QueueEmpty{
 
 		boolean loop=false;
 		takeData();
-		do {
+		/*do {
 
 			Menu();
-		}while(!loop);
-
+		}while(!loop);*/
 	}
-	public void selectfile(String User,int i) throws IOException
-	{
+	
+	public void selectfile(String User,int i) throws IOException{
 		if(i==1)
 		{
 			File file =new File("Admin.txt");//1
@@ -99,48 +98,79 @@ public class Management {
 
 
 	}
+	public Boolean searchCustomer(String phone,String password) {
+		boolean enter = false;
+
+		int customerId = 0;
+		for (int i = 0; i < cList.size(); i++) {
+			if(cList.get(i).getPhone().getNumber().equals(phone)&&cList.get(i).getPassword().equals(password)) {//user entered the system
+				enter = true;
+				Customerid(customerId,i);
+			}
+		}
+		return enter;
+	}
+	public Boolean searchAdmin(String phone,String password) {
+		boolean enter = false;
+
+		int adminId = 0;
+		for (int i = 0; i < aList.size(); i++) {
+			if(aList.get(i).getPhone().getNumber().equals(phone)&&aList.get(i).getPassword().equals(password)) {//user entered the system
+				enter = true;
+				Adminid(adminId,i);
+			}
+
+		}
+		return enter;
+	}
+	public int Adminid(int adminId ,int i) {
+
+		return adminId=i;
+	}
+	public int Customerid(int customerId,int i) {
+
+		return customerId=i;
+	}
+
 	public boolean Menu( ) throws IOException, QueueEmpty, QueueFull {
+
+
 		Scanner s = new Scanner(System.in);
 		Scanner sn = new Scanner(System.in);//for strings
 		System.out.println("1 - Admin\n2 - Customer\n3 - Sign-Up \n4 - Exit");
 		int answer = s.nextInt();
+
 		if(answer == 1) {//admin
 			boolean enter = false;
 			int adminId = 0;
 			do {
-				System.out.print("Phone Number: ");
-
-				String phone = s.next();
-
-				System.out.print("Password: ");
-				String password = s.next();
-
-				for (int i = 0; i < aList.size(); i++) {
-					if(aList.get(i).getPhone().getNumber().equals(phone)&&aList.get(i).getPassword().equals(password)) {//user entered the system
-						enter = true;
-						adminId = i;
-					}
-				}
-				if(!enter) System.err.println("Something went wrong!Enter again.");
+				Boolean user=true;
+				//Login l=new Login();
+				//search();
 			} while (!enter);
 
 
 
 			do {
-				System.out.println("1-SET INFORMATION");
-				System.out.println("2-REMOVE FOOD");
-				System.out.println("3-ADD FOOD");
-				System.out.println("4-DISPLAY CUSTOMERS");
-				System.out.println("5-SHUT DOWN THE RESTAURANT");
-				System.out.println("6-DISPLAY MENU");
-				System.out.println("7-REMOVE CUSTOMER");
-				System.out.println("8-EXIT");
+				System.out.println("1-SET INFORMATION");//
+				System.out.println("2-REMOVE FOOD");//*
+				System.out.println("3-ADD FOOD");//*
+				System.out.println("4-DISPLAY CUSTOMERS");//*
+				System.out.println("5-SHUT DOWN THE RESTAURANT");//*
+				System.out.println("6-DISPLAY MENU");//*
+				System.out.println("7-REMOVE CUSTOMER");//*
+				System.out.println("8-EXIT");//*
 				answer = s.nextInt();
 				if(answer == 1) {//set information
+
 					System.out.println("1-Change your PERSONAL information");
 					System.out.println("2-Change RESTAURANT'S information");
 					answer = s.nextInt();
 					if(answer == 1) {//personal info
+						Framesmenu frame=new Framesmenu();
+						frame.SetInformationAdmin(aList);
+						frame.getAdmin().setVisible(true);
+						System.out.println(aList.get(adminId).toString());
 						System.out.println("name,surname,address(street,town,city,description),phone(country code,number),password(leave only a comma between them)");
 						System.out.println(aList.get(adminId).toString());
 						String info = sn.nextLine();
@@ -270,7 +300,7 @@ public class Management {
 				System.out.println("4-DISPLAY ALL FOODS");
 				System.out.println("5-EXIT");
 				answer = s.nextInt();
-				
+
 				if(answer == 1) {//set information
 					System.out.println("Change your personal information");
 					System.out.println("name,surname,address(street,town,city,description),phone(country code,number),password(leave only a comma between them)");
