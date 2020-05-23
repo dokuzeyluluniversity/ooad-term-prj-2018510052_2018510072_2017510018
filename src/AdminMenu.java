@@ -58,6 +58,7 @@ public class AdminMenu extends JFrame {
 		setTitle("ONLINE FOOD SYSTEM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 865, 488);
+		getContentPane().setBackground(new Color(250, 128, 114));
 		getContentPane().setLayout(null);
 
 		JPanel customer = new JPanel();
@@ -248,6 +249,18 @@ public class AdminMenu extends JFrame {
 				}
 			}
 		});
+		
+		JMenuItem mnýtmBackToMain = new JMenuItem("Back to Main Menu");
+		mnýtmBackToMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					setVisible(false);
+					Login l =new Login();
+			///////////////
+				l.setVisible(true);
+				
+			}
+		});
+		mnUser.add(mnýtmBackToMain);
 		mnUser.add(mnýtmShutDownRestaurant);
 
 		JLabel lblNewLabel = new JLabel(a.getRestaurant().getRestaurant_name());

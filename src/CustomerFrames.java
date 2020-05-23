@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -67,7 +68,7 @@ public class CustomerFrames extends JFrame {
 				try {
 					m = new Management();
 					for (int i = 0; i < m.rList.size(); i++) {
-						res[i].setText(m.rList.get(i));
+						//res[i].setText(m.rList.get(i));
 						food.setBounds(162, 123+2*i, 146+2*i, 26+2*i);
 						contentPane.add(res[i]);
 						res[i].setColumns(10);
@@ -152,7 +153,7 @@ public class CustomerFrames extends JFrame {
 	public void CustomerFrames() {
 		
 	}
-	public void SetCustomerInfo() {
+	public void SetCustomerInfo(String number,String password) {
 		SetCustomerInfo=new JFrame();
 		SetCustomerInfo.setTitle("SET INFORMATION");
 		SetCustomerInfo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -255,17 +256,16 @@ public class CustomerFrames extends JFrame {
 				try {
 					Management	m = new Management();
 					System.out.println("name,surname,address(street,town,city,description),phone(country code,number),password(leave only a comma between them)");
-					m.cList.get(m.getCustomerid()).setUser(textField.getText(),textField_1.getText(), new Address(textField_5.getText(),textField_6.getText(),textField_7.getText(),textField_8.getText()),
+					m.cList.get(m.findcustomerid(number, password)).setUser(textField.getText(),textField_1.getText(), new Address(textField_5.getText(),textField_6.getText(),textField_7.getText(),textField_8.getText()),
 							new Phone(textField_2.getText(),textField_3.getText()),textField_4.getText());
-					System.out.println("Your information changed successfully!");
-					System.out.println(m.cList.get(m.getCustomerid()).toString());
+					
 				
 				} catch (QueueEmpty | QueueFull | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-					JOptionPane.showMessageDialog(contentPane, "CHOOSED");}
+					JOptionPane.showMessageDialog(contentPane, "Your information changed successfully!");}
 		});
 	}
 }

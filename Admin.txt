@@ -1,5 +1,7 @@
-
-i,i,1,1
-e,e,2,2
-efe,efe,3,3
-yaðmur,önde,546,irem
+1,irem,okur,,,,,8,4,7
+2,irem,çalmaz,,,,,66,77,lütfü
+3,mellliiissssa,beyyysssü,,,,,56,123,0
+4,berk,berk,,,,,3,1,1
+5,i,o,,,,,3,3,2
+6,t,t,,,,,4,4,4
+7,y,y,,,,,4,5,5

@@ -41,9 +41,11 @@ public class Food {
 		addRestaurant(restaurant);
 		this.ingredients.add(ingredients);
 		this.price = price;
+		
 	}
 	public void addRestaurant(Restaurant rest) {
 		restaurant_list = new ArrayList<Restaurant>();
 		restaurant_list.add(rest);
 	}
+	
 }

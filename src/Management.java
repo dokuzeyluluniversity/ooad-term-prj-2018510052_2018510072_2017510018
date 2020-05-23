@@ -12,19 +12,18 @@ import org.omg.CORBA.REBIND;
 
 public class Management {
 	public ArrayList<Admin> aList = new ArrayList<Admin>();
-	ArrayList<Customer> cList = new ArrayList<Customer>();
-	ArrayList<Food> fList = new ArrayList<Food>();
+	public ArrayList<Customer> cList = new ArrayList<Customer>();
+	public ArrayList<Food> fList = new ArrayList<Food>();
+	public ArrayList<Food> rList = new ArrayList<Food>();
+
+
 	Management() throws QueueFull, IOException, QueueEmpty{
-
-		boolean loop=false;
+		aList.add(new Admin("", "", new Address("", "", "", ""), new Phone("", ""), ""));
 		takeData();
-		/*do {
 
-			Menu();
-		}while(!loop);*/
 	}
-	
-	public void selectfile(String User,int i) throws IOException{
+	public void selectfile(String User,int i) throws IOException
+	{
 		if(i==1)
 		{
 			File file =new File("Admin.txt");//1
@@ -37,7 +36,7 @@ public class Management {
 
 		}
 		else if(i==3)
-		{   File ord =new File("Ords.txt");
+		{   File ord =new File("Restaurant.txt");
 		writeFile(User,3,ord);
 
 		}
@@ -45,13 +44,34 @@ public class Management {
 	}
 	public void writeFile(String text,int i,File fileName) throws IOException {
 
-
 		BufferedWriter writer = new BufferedWriter(
 				new FileWriter(fileName, true)  //Set true for append mode
 				);  
 		writer.newLine();   //Add new line
 		writer.write(text);
 		writer.close();
+
+	}
+	public void FindLine(int id,String oldcontent) throws NumberFormatException, IOException {
+		File f =new File("Restaurant.txt");
+		BufferedReader br3 = new BufferedReader(new FileReader(f)); 
+
+		String st3; 
+		while ((st3 = br3.readLine()) != null) {
+			String sp[] =st3.split(",");
+			String newcontent="";
+			if(Integer.parseInt(sp[0])==(id))
+			{
+				newcontent=st3.replaceAll(st3, oldcontent);
+				System.out.println(newcontent);
+				FileWriter writer = new FileWriter(f);
+				writer.write(newcontent);
+			}
+
+
+		}
+
+
 	}
 	public void takeData() throws IOException
 	{
@@ -69,7 +89,8 @@ public class Management {
 			{
 
 				String sp[] =st.split(",");
-				aList.add(new Admin(sp[0],sp[1],new Address("","","",""),new Phone("",sp[2]),sp[3]));
+				Admin a=new Admin(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
+				a.createAdmin(a.getID_admin(),a, aList);
 
 			}
 
@@ -88,7 +109,28 @@ public class Management {
 			if(!st1.equals(""))
 			{
 				String sp[] =st1.split(",");
-				cList.add(new Customer(sp[0],sp[1],new Address("","","",""),new Phone("",sp[2]),sp[3]));
+				Customer c=new Customer(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
+				c.CreateCustomer(c, cList);
+
+			}
+
+
+		}
+		f =new File("Restaurant.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
+		BufferedReader br3 = new BufferedReader(new FileReader(f)); 
+
+		String st3; 
+		while ((st3 = br3.readLine()) != null) {
+
+			if(!st3.equals(""))
+			{
+				//selectfile(st3,3);
+				String sp[] =st3.split(",");
+				aList.get(Integer.parseInt(sp[0])).setRestaurant(new Restaurant(sp[1], new Address(sp[2],sp[3],sp[4],sp[5]), new Phone(sp[6],sp[7])));
 
 			}
 
@@ -97,40 +139,87 @@ public class Management {
 
 
 
+
 	}
-	public Boolean searchCustomer(String phone,String password) {
+
+	public Boolean searchCustomer(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 		boolean enter = false;
 
-		int customerId = 0;
 		for (int i = 0; i < cList.size(); i++) {
 			if(cList.get(i).getPhone().getNumber().equals(phone)&&cList.get(i).getPassword().equals(password)) {//user entered the system
 				enter = true;
-				Customerid(customerId,i);
 			}
+
 		}
 		return enter;
 	}
-	public Boolean searchAdmin(String phone,String password) {
+
+
+	public int findcustomerid(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 		boolean enter = false;
 
-		int adminId = 0;
+		int customerid=0;
+		for (int i = 0; i < cList.size(); i++) {
+			if(cList.get(i).getPhone().getNumber().equals(phone)&&cList.get(i).getPassword().equals(password)) {//user entered the system
+				enter = true;
+				customerid=i;
+			}
+
+		}
+		return customerid;
+	}
+	public Boolean searchAdmin(String phone,String password) throws QueueFull, IOException, QueueEmpty {
+
+		boolean enter = false;
+		int adminId = 0 ;
+
 		for (int i = 0; i < aList.size(); i++) {
 			if(aList.get(i).getPhone().getNumber().equals(phone)&&aList.get(i).getPassword().equals(password)) {//user entered the system
 				enter = true;
-				Adminid(adminId,i);
+
+
 			}
 
 		}
 		return enter;
 	}
-	public int Adminid(int adminId ,int i) {
+	public int findAdminid(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 
-		return adminId=i;
-	}
-	public int Customerid(int customerId,int i) {
+		boolean enter = false;
+		int adminId = 0 ;
 
-		return customerId=i;
+		for (int i = 0; i < aList.size(); i++) {
+			if(aList.get(i).getPhone().getNumber().equals(phone)&&aList.get(i).getPassword().equals(password)) {//user entered the system
+				enter = true;
+
+				adminId=i;
+			}
+			System.out.println(aList.get(i));
+		}
+		return adminId;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
 
 	public boolean Menu( ) throws IOException, QueueEmpty, QueueFull {
 
@@ -143,23 +232,16 @@ public class Management {
 		if(answer == 1) {//admin
 			boolean enter = false;
 			int adminId = 0;
-			do {
-				Boolean user=true;
-				//Login l=new Login();
-				//search();
-			} while (!enter);
-
-
 
 			do {
-				System.out.println("1-SET INFORMATION");//
-				System.out.println("2-REMOVE FOOD");//*
-				System.out.println("3-ADD FOOD");//*
-				System.out.println("4-DISPLAY CUSTOMERS");//*
-				System.out.println("5-SHUT DOWN THE RESTAURANT");//*
-				System.out.println("6-DISPLAY MENU");//*
-				System.out.println("7-REMOVE CUSTOMER");//*
-				System.out.println("8-EXIT");//*
+				System.out.println("1-SET INFORMATION");
+				System.out.println("2-REMOVE FOOD");
+				System.out.println("3-ADD FOOD");
+				System.out.println("4-DISPLAY CUSTOMERS");
+				System.out.println("5-SHUT DOWN THE RESTAURANT");
+				System.out.println("6-DISPLAY MENU");
+				System.out.println("7-REMOVE CUSTOMER");
+				System.out.println("8-EXIT");
 				answer = s.nextInt();
 				if(answer == 1) {//set information
 
@@ -167,9 +249,7 @@ public class Management {
 					System.out.println("2-Change RESTAURANT'S information");
 					answer = s.nextInt();
 					if(answer == 1) {//personal info
-						Framesmenu frame=new Framesmenu();
-						frame.SetInformationAdmin(aList);
-						frame.getAdmin().setVisible(true);
+
 						System.out.println(aList.get(adminId).toString());
 						System.out.println("name,surname,address(street,town,city,description),phone(country code,number),password(leave only a comma between them)");
 						System.out.println(aList.get(adminId).toString());
@@ -259,7 +339,7 @@ public class Management {
 				selectfile(info,1);
 				String[] split = info.split(",");
 				Admin newAdmin = new Admin(split[0],split[1],new Address("","","",""),new Phone("",split[2]),split[3]);
-				newAdmin.createAdmin(newAdmin, aList);
+
 				System.out.println(newAdmin.toString());
 
 			}
@@ -351,6 +431,6 @@ public class Management {
 		return false;
 	}
 
-
+	 */
 }
 

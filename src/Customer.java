@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Customer extends User{
@@ -9,6 +10,7 @@ public class Customer extends User{
 		setID_customer(count);
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getID_customer() {
 		return ID_customer;
 	}
@@ -52,7 +54,7 @@ public class Customer extends User{
 	}
 	public void Order (ArrayList<Admin> aList,ArrayList<Customer> cList,int CustomerId ) throws QueueFull {
 		boolean budgetflag=false;
-		Scanner sn =new Scanner(System.in);
+	 	Scanner sn =new Scanner(System.in);
 
 		do{
 			System.out.print("Please enter your budget : " );
@@ -103,5 +105,8 @@ public class Customer extends User{
 		}while(!budgetflag);
 
 	}
+
+
+
 
 }

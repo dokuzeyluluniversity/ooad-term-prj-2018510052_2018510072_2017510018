@@ -8,7 +8,7 @@ public class Restaurant {
 	private ArrayList<Food> food = new ArrayList<Food>(); 
 	private BoundedQueue customerQueue = new BoundedQueue();
 	private boolean shutDown = false;
-	public Restaurant(String restaurant_name, String ship_min, Address address, Phone phone) {
+	public Restaurant(String restaurant_name, Address address, Phone phone) {
 		this.restaurant_name = restaurant_name;
 		this.ship_min = ship_min;
 		this.address = address;

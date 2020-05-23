@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class SetUserInfo extends JFrame {
@@ -208,9 +209,28 @@ public class SetUserInfo extends JFrame {
 								new Phone(cCode.getText(),number.getText()), a.getPassword());
 					}
 					else {
-						a.setRestaurant(new Restaurant(rName.getText(), a.getRestaurant().getShip_min(), 
+						try {
+						a.setRestaurant(new Restaurant(rName.getText(), 
 								new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 								new Phone(cCode.getText(),number.getText())));
+						
+							Management m= new Management();
+							
+							//m.FindLine(a.getID_admin(),a.getID_admin()+","+rName.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
+								//	cCode.getText()+","+number.getText());
+							m.selectfile(a.getID_admin()+","+rName.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
+								cCode.getText()+","+number.getText(),3);
+						} catch (QueueFull e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (QueueEmpty e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					}
 					JOptionPane.showMessageDialog(getContentPane(),	"Your information has been changed.");
 					setVisible(false);

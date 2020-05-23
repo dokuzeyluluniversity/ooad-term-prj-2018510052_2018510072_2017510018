@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Admin extends User{
@@ -17,7 +18,7 @@ public class Admin extends User{
 	public Admin(String name, String surname, Address address, Phone phone, String password) {
 		super(name, surname, address, phone,password);
 		setID_admin(count);
-		this.restaurant = new Restaurant(String.valueOf(count),"",new Address("","","",""),new Phone("",""));
+		this.restaurant = new Restaurant(String.valueOf(count),new Address("","","",""),new Phone("",""));
 
 	}
 	public int getID_admin() {
@@ -37,9 +38,11 @@ public class Admin extends User{
 		return "getName()=" + getName() + ", getSurname()=" + getSurname()
 		+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
 	}
-	public void createAdmin(Admin ad, ArrayList<Admin> a) {
-		a.add(ad);
-		count++;
+	public void createAdmin(int index,Admin ad, ArrayList<Admin> a) {
+	
+			a.add(index,ad);
+			count++;
+	
 	}
 
 

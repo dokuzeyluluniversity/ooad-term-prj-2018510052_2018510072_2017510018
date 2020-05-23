@@ -1,6 +1,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,10 +12,7 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 
 
-public class Menu extends JFrame {
-	public Menu() {
-
-	}
+public class CustomerMenu extends JFrame {
 
 	private JFrame frame;
 	private JRadioButton rbtnsetinfo;
@@ -27,7 +26,7 @@ public class Menu extends JFrame {
 	private JRadioButton rbtnshutdown;
 
 
-	public void cMenu(boolean flag) 
+	public  CustomerMenu(String number ,String password) 
 	{
 
 		frame = new JFrame();
@@ -37,44 +36,25 @@ public class Menu extends JFrame {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblMenu = new JLabel("OPTIONS");
-		lblMenu.setBounds(123, 30, 46, 14);
+		lblMenu.setBounds(123, 30, 118, 14);
 		frame.getContentPane().add(lblMenu);
-		
+
 
 		rbtnsetinfo = new JRadioButton("Set User Information");
-		rbtnsetinfo.setBounds(60, 51, 109, 23);
+		rbtnsetinfo.setBounds(60, 51, 181, 23);
 		rbtnsetinfo.setSelected(true);
 		frame.getContentPane().add(rbtnsetinfo);
 
-		////////CUSTOMER
-		if(flag) {
-			rbtnOrder = new JRadioButton("Give Order");
-			rbtnOrder.setBounds(60, 77, 323, 23);
-			frame.getContentPane().add(rbtnOrder);
-			//////budget gircek, istediði food girilcek  restaurantlar sýralýncak
-			rbtnDisplayorders = new JRadioButton("Display All Orders");
-			rbtnDisplayorders.setBounds(60, 103, 213, 23);
-			frame.getContentPane().add(rbtnDisplayorders);
 
-		}////admin
-		else {
-			rbtnDisplayAllP = new JRadioButton("Remove Food");
-			rbtnDisplayAllP.setBounds(60, 77, 323, 23);
-			frame.getContentPane().add(rbtnDisplayAllP);
+		rbtnOrder = new JRadioButton("Give Order");
+		rbtnOrder.setBounds(60, 77, 323, 23);
+		frame.getContentPane().add(rbtnOrder);
 
-			rbtnadd = new JRadioButton("Add Food");
-			rbtnadd.setBounds(60, 77, 323, 23);
-			frame.getContentPane().add(rbtnadd);
+		rbtnDisplayorders = new JRadioButton("Display All Orders");
+		rbtnDisplayorders.setBounds(60, 103, 213, 23);
+		frame.getContentPane().add(rbtnDisplayorders);
 
-			rbtnDisplayAllS = new JRadioButton("Display All Customers");
-			rbtnDisplayAllS.setBounds(60, 103, 213, 23);
-			frame.getContentPane().add(rbtnDisplayAllS);
 
-			rbtnshutdown = new JRadioButton("Shut Down Restaurant");
-			rbtnshutdown.setBounds(60, 130, 213, 23);
-			frame.getContentPane().add(rbtnshutdown);
-
-		}
 
 		rbtnExit = new JRadioButton("Exit");
 		rbtnExit.setBounds(60, 155, 109, 23);
@@ -96,11 +76,9 @@ public class Menu extends JFrame {
 				if (rbtnsetinfo.isSelected())
 				{
 					CustomerFrames cf=new CustomerFrames();
-					cf.SetCustomerInfo();
+					cf.SetCustomerInfo(number,password);
 					cf.getSetCustomerInfo().setVisible(true);
-				
-					//f.SetInformationAdmin();
-					//f.getAdmin().setVisible(true);
+
 					frame.setVisible(false);
 				}
 				else if(rbtnOrder.isSelected())
@@ -109,11 +87,9 @@ public class Menu extends JFrame {
 					cf.GiveOrder();
 					cf.getGiveOrder().setVisible(true);
 					frame.setVisible(false);
-					
-				
-	
+
 				}
-				
+
 
 			}
 		});
