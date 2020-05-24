@@ -16,33 +16,47 @@ public class Management {
 	public ArrayList<Food> fList = new ArrayList<Food>();
 	public ArrayList<Food> rList = new ArrayList<Food>();
 
-
 	Management() throws QueueFull, IOException, QueueEmpty{
+
 		aList.add(new Admin("", "", new Address("", "", "", ""), new Phone("", ""), ""));
 		takeData();
+		//		for (int i = 0; i < aList.size(); i++) {
+		//			System.out.println(aList.get(i).toString());
+		//		}
 
+		System.out.println(aList.size());
 	}
 	public void selectfile(String User,int i) throws IOException
 	{
 		if(i==1)
 		{
 			File file =new File("Admin.txt");//1
-			writeFile(User,1,file);
+			writeFile(User,file);
 
 		}
 		else if(i==2)
 		{    File cust =new File("Customers.txt");//2
-		writeFile(User,2,cust);
+		writeFile(User,cust);
 
 		}
 		else if(i==3)
 		{   File ord =new File("Restaurant.txt");
-		writeFile(User,3,ord);
+		writeFile(User,ord);
+
+		}
+		else if(i==4)
+		{   File ord =new File("Food.txt");
+		writeFile(User,ord);
+
+		}
+		else if(i==5)
+		{   File ord =new File("Orders.txt");
+		writeFile(User,ord);
 
 		}
 
 	}
-	public void writeFile(String text,int i,File fileName) throws IOException {
+	public void writeFile(String text,File fileName) throws IOException {
 
 		BufferedWriter writer = new BufferedWriter(
 				new FileWriter(fileName, true)  //Set true for append mode
@@ -52,6 +66,15 @@ public class Management {
 		writer.close();
 
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	public void FindLine(int id,String oldcontent) throws NumberFormatException, IOException {
 		File f =new File("Restaurant.txt");
 		BufferedReader br3 = new BufferedReader(new FileReader(f)); 
@@ -73,7 +96,19 @@ public class Management {
 
 
 	}
-	public void takeData() throws IOException
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void takeData() throws IOException,  QueueFull
 	{
 
 		File f =new File("Admin.txt");
@@ -90,8 +125,16 @@ public class Management {
 
 				String sp[] =st.split(",");
 				Admin a=new Admin(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
-				a.createAdmin(a, aList);
+				//a.createAdmin(a.getID_admin(),a, aList);
+				if(Integer.valueOf(sp[0])<aList.size()) {
+					aList.remove(aList.get(Integer.valueOf(sp[0])));
+					//aList.remove(Integer.valueOf(sp[0]));
+					aList.add(Integer.valueOf(sp[0]), a);
 
+				}
+				else {
+					a.createAdmin(a, aList);
+				}
 			}
 
 
@@ -110,7 +153,15 @@ public class Management {
 			{
 				String sp[] =st1.split(",");
 				Customer c=new Customer(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
-				c.CreateCustomer(c, cList);
+				if(Integer.valueOf(sp[0])<=cList.size()) {
+					cList.remove(cList.get(Integer.valueOf(sp[0])));
+					cList.add(Integer.valueOf(sp[0]), c);
+
+				}
+				else {
+					c.CreateCustomer(c, cList);
+				}
+
 
 			}
 
@@ -128,9 +179,61 @@ public class Management {
 
 			if(!st3.equals(""))
 			{
+				System.out.println(st3);
 				//selectfile(st3,3);
 				String sp[] =st3.split(",");
 				aList.get(Integer.parseInt(sp[0])).setRestaurant(new Restaurant(sp[1], new Address(sp[2],sp[3],sp[4],sp[5]), new Phone(sp[6],sp[7])));
+				aList.get(Integer.parseInt(sp[0])).getRestaurant().setShutDown(Boolean.valueOf(sp[8]));
+			}
+
+
+		}
+
+		f =new File("Food.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
+		BufferedReader br4 = new BufferedReader(new FileReader(f)); 
+
+		String st4; 
+		while ((st4 = br4.readLine()) != null) {
+
+			if(!st4.equals(""))
+			{
+				//selectfile(st3,3);
+				String sp[] =st4.split("-");
+				if(!Boolean.valueOf(sp[4])) {
+					fList.add(new Food(sp[1], sp[2], Integer.valueOf(sp[3]), 
+							((Restaurant)aList.get(Integer.valueOf(sp[0])).getRestaurant())));
+					aList.get(Integer.parseInt(sp[0])).getRestaurant().getFood().add(new Food(sp[1], sp[2], Integer.valueOf(sp[3]), 
+							((Restaurant)aList.get(Integer.valueOf(sp[0])).getRestaurant())));
+				}
+				else continue;
+
+			}
+
+
+		}
+
+
+
+		f =new File("Orders.txt");
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
+		BufferedReader br5 = new BufferedReader(new FileReader(f)); 
+
+		String st5; 
+		while ((st5 = br5.readLine()) != null) {
+
+			if(!st5.equals(""))
+			{
+				//selectfile(st3,3);
+				String sp[] =st5.split(";");
+				aList.get((int)Integer.valueOf((String)sp[0])).getRestaurant().getCustomerqueue().enqueue(cList.get((int)Integer.valueOf((String)sp[1])));
+				cList.get(Integer.parseInt(sp[1])).setOrders(new Food(sp[2], sp[3], Integer.parseInt(sp[4]), aList.get(Integer.parseInt(sp[0])).getRestaurant()));
 
 			}
 
@@ -142,12 +245,78 @@ public class Management {
 
 	}
 
+	public void fileUpdate(String fName,String line) throws IOException {
+		File inputFile = new File(fName);
+		BufferedReader br4 = new BufferedReader(new FileReader(inputFile)); 
+		ArrayList<String>n= new ArrayList<String>();
+		String st4=""; 
+
+		while ((st4 = br4.readLine()) != null) {
+			if(!st4.equals("")){
+				n.add(st4);
+				//System.out.println(st4);
+			}
+		}
+		for (int i = 0; i < n.size(); i++) {
+			System.out.println(n.get(i));
+		}
+		br4.close();
+		//System.out.println("line "+line);
+		for (int i = 0; i < n.size(); i++) {
+			System.out.println("asd"+n.get(i).substring(0, line.lastIndexOf("-")));
+			System.out.println("asd"+line.substring(0, line.lastIndexOf("-")));
+			if(n.get(i).substring(0, n.get(i).lastIndexOf("-")).equals(line.substring(0, line.lastIndexOf("-")))){
+				System.out.println("removed"+n.get(i));
+				n.remove(n.get(i));
+				n.add(i, line);
+			}
+			else continue;
+		}
+		BufferedWriter br3 = new BufferedWriter(new FileWriter(inputFile)); 
+		for (int i = 0; i < n.size(); i++) {
+			br3.write(n.get(i));
+			br3.newLine();
+		}
+
+		br3.close();
+
+
+
+
+
+
+
+
+		//		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		//
+		//		BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile,true));
+		//		// Read each line from the reader and compare it with
+		//		// with the line to remove and write if required
+		//		String s = "";
+		//		int c =0;
+		//		System.out.println("buradayým");
+		//		while ((s = reader.readLine()) != null) {
+		//			System.out.println(c++);
+		//			System.out.println(s);
+		//			System.out.println(line);
+		//			if (s.substring(0, line.lastIndexOf("-")).equals(line.substring(0, line.lastIndexOf("-")))) {
+		//				writer.newLine();
+		//				writer.write(line);
+		//				System.out.println("buldum"+line+c);
+		//				writer.newLine();
+		//			}
+		//		}
+		//		reader.close();
+		//		writer.close();
+	}
+
 	public Boolean searchCustomer(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 		boolean enter = false;
 
 		for (int i = 0; i < cList.size(); i++) {
 			if(cList.get(i).getPhone().getNumber().equals(phone)&&cList.get(i).getPassword().equals(password)) {//user entered the system
 				enter = true;
+
 			}
 
 		}
@@ -168,6 +337,7 @@ public class Management {
 		}
 		return customerid;
 	}
+
 	public Boolean searchAdmin(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 
 		boolean enter = false;
@@ -176,13 +346,14 @@ public class Management {
 		for (int i = 0; i < aList.size(); i++) {
 			if(aList.get(i).getPhone().getNumber().equals(phone)&&aList.get(i).getPassword().equals(password)) {//user entered the system
 				enter = true;
-
+				//System.out.println(aList.get(i).toString());
 
 			}
 
 		}
 		return enter;
 	}
+
 	public int findAdminid(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 
 		boolean enter = false;
@@ -194,7 +365,7 @@ public class Management {
 
 				adminId=i;
 			}
-			System.out.println(aList.get(i));
+			//System.out.println(aList.get(i));
 		}
 		return adminId;
 	}

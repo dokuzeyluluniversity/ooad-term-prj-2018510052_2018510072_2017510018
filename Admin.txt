@@ -1,7 +1,9 @@
 1,irem,okur,,,,,8,4,7
 2,irem,çalmaz,,,,,66,77,lütfü
 3,mellliiissssa,beyyysssü,,,,,56,123,0
-4,berk,berk,,,,,3,1,1
-5,i,o,,,,,3,3,2
-6,t,t,,,,,4,4,4
-7,y,y,,,,,4,5,5
+4,y,y,,,,,4,5,5r,önde,546,23
+5,melisa,beysümengü,109,esenyurt,istanbul,terzi karþýsý,90,1234,melisa
+3,ali,duran,109,esenyurt,istanbul,terzi karþýsý,90,1234,4321
+3,melisa,duran,109,esenyurt,istanbul,terzi karþýsý,90,1234,4321
+1,irem,beysümengü,,,istanbul,,8,4,32
+1,irem,beysümengü,,,istanbul,,8,4,32

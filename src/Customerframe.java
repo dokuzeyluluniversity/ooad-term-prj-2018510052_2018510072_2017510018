@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 
 public class Customerframe extends JFrame {
 
+
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
@@ -37,26 +38,16 @@ public class Customerframe extends JFrame {
 	private JTextField budget;
 	private JTextField food;
 	DefaultTableModel model;
+	private JTable table_2;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Customerframe frame = new Customerframe();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public void FRAME(ArrayList<Food> fList,ArrayList<Customer> cList,Customer c) {
+	public Customerframe(ArrayList<Admin> aList,ArrayList<Food> fList,ArrayList<Customer> cList,Customer c) {
 
 		setTitle("Customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,18 +93,12 @@ public class Customerframe extends JFrame {
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(15, 16, 426, 150);
 		panel_1.add(scrollPane_1);
-		ArrayList<Admin> aList=new 	ArrayList<Admin>();
-		aList.add(new Admin("irem","okur",new Address("", "", "", "") ,new Phone("", "1"), "123"));
-		for (int i = 0; i < aList.size(); i++) {
-			aList.get(i).getRestaurant().addFood(new Food("çorba","tuz",44, aList.get(i).getRestaurant()));
-			aList.get(i).getRestaurant().addFood(new Food("çorba","tuz",14, aList.get(i).getRestaurant()));
-		}
 
-		String [][] allfood=new String[aList.size()][4];
+		String [][] allfood=new String[fList.size()][4];
 
 		for (int i = 0; i < allfood.length  ; i++) {
 
-			allfood[i]=aList.get(i).getRestaurant().getFood().toString().split("-");
+			allfood[i]=fList.get(i).toString().split("-");
 			/*	String s="makarna,irem,tuz,3";
 			String [] sp=s.split(",");
 			allfood[0][0]=sp[0];
@@ -140,7 +125,7 @@ public class Customerframe extends JFrame {
 		table_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table_1.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] {
-						"Food Name","Restaurant Name","Ingredients","Price"
+						"Food Name","Ingredients","Price","Restaurant Name"
 		}
 				));
 
@@ -168,12 +153,23 @@ public class Customerframe extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					int selectedRow=0;
+					int selectedRow = table_1.getSelectedRow();
 					for (int i = 0; i < aList.size(); i++) {
-						selectedRow = table_1.getSelectedRow();
-						JOptionPane.showMessageDialog(getContentPane(),	"Your order has been received!");
-						aList.get(i).getRestaurant().setCustomerqueue(cList.get(c.getID_customer()));
-						cList.get(c.getID_customer()).setOrders(aList.get(i).getRestaurant().FindFood(aList.get(i).getRestaurant(), food.getText()));
+						
+						if(((String)table_1.getValueAt(selectedRow, 3)).trim().equals(aList.get(i).getRestaurant().getRestaurant_name().trim())) {
+							Management m = new Management();
+							m.selectfile(m.findAdminid(aList.get(i).getPhone().getNumber(), aList.get(i).getPassword())+";"+m.findcustomerid(c.getPhone().getNumber(), c.getPassword())+";"+
+									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 3)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2), 5);
+							
+							aList.get(i).getRestaurant().setCustomerqueue(c);
+							//System.out.println(cList.get(c.getID_customer()).getName());
+							c.setOrders(aList.get(i).getRestaurant().FindFood(aList.get(i).getRestaurant(), food.getText()));
+							JOptionPane.showMessageDialog(getContentPane(),	"Your order has been received!");
+							
+						}
+						else {
+							System.out.println(aList.get(i).getRestaurant().getRestaurant_name()+"      "+table_1.getValueAt(selectedRow, 3));
+						}
 
 					}
 
@@ -206,7 +202,7 @@ public class Customerframe extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Search Food", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(583, 118, 343, 210);
+		panel_2.setBounds(562, 32, 343, 200);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -227,12 +223,10 @@ public class Customerframe extends JFrame {
 
 				for (int i = 0; i < allfood.length; i++) {
 
-					if(Integer.valueOf(budget.getText())>=Integer.valueOf(allfood[i][3])&&food.getText().equals(allfood[i][0])) {
+					if(Integer.valueOf(budget.getText())>=Integer.valueOf(allfood[i][2])&&food.getText().equals(allfood[i][0])) {
 						flag=true;
 						model = (DefaultTableModel) table_1.getModel();
 						model.addRow(new Object[]{food.getText(), allfood[i][1],allfood[i][2], allfood[i][3]});
-
-
 					}
 
 				}
@@ -260,5 +254,24 @@ public class Customerframe extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Food");
 		lblNewLabel_1.setBounds(36, 98, 69, 20);
 		panel_2.add(lblNewLabel_1);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "All Foods", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBounds(556, 261, 355, 200);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(6, 18, 343, 169);
+		panel_3.add(scrollPane_2);
+
+		table_2 = new JTable();
+		table_2.setModel(new DefaultTableModel(
+				allfood,
+				new String[] {
+						"Food Name", "Ingredients", "Price", "Restaurant Name"
+				}
+				));
+		scrollPane_2.setViewportView(table_2);
 	}
 }

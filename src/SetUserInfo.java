@@ -119,7 +119,7 @@ public class SetUserInfo extends JFrame {
 		lblDescription = new JLabel("Description");
 		lblDescription.setBounds(454, 84, 77, 16);
 		panel.add(lblDescription);
-		
+
 		name = new JTextField();
 		surname = new JTextField();
 		passwordField = new JPasswordField();
@@ -135,7 +135,7 @@ public class SetUserInfo extends JFrame {
 			lblName.setBounds(70, 38, 33, 16);
 			panel.add(lblName);
 
-			
+
 			surname.setBounds(198, 55, 116, 22);
 			panel.add(surname);
 			surname.setColumns(10);
@@ -144,7 +144,7 @@ public class SetUserInfo extends JFrame {
 			lblSurname.setBounds(198, 38, 56, 16);
 			panel.add(lblSurname);
 
-			
+
 			passwordField.setBounds(213, 211, 121, 22);
 			panel.add(passwordField);
 
@@ -152,7 +152,7 @@ public class SetUserInfo extends JFrame {
 			label_1.setBounds(213, 194, 84, 16);
 			panel.add(label_1);
 
-			
+
 			passwordField_1.setBounds(213, 254, 121, 22);
 			panel.add(passwordField_1);
 
@@ -166,7 +166,7 @@ public class SetUserInfo extends JFrame {
 			panel.add(separator);
 		}
 		else {
-			
+
 			rName.setBounds(70, 56, 126, 22);
 			panel.add(rName);
 			rName.setColumns(10);
@@ -198,63 +198,61 @@ public class SetUserInfo extends JFrame {
 			rName.setText(a.getRestaurant().getRestaurant_name());cCode.setText(a.getRestaurant().getPhone().getCountry_code());number.setText(a.getRestaurant().getPhone().getNumber());
 			street.setText(a.getRestaurant().getAddress().getStreetName());town.setText(a.getRestaurant().getAddress().getTown());city.setText(a.getRestaurant().getAddress().getCity());description.setText(a.getRestaurant().getAddress().getDescription());
 		}
-		
+
 
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(passwordField.getText()+" "+passwordField_1.getText()+" "+currentPassword.getText());
+				//System.out.println(passwordField.getText()+" "+passwordField_1.getText()+" "+currentPassword.getText());
 				if(passwordField.getText().equals("")&&passwordField_1.getText().equals("")&&currentPassword.getText().equals(a.getPassword())) {//if the password hasn't changed.
 					if(isUser) {
 						a.setUser(name.getText(), surname.getText(), new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 								new Phone(cCode.getText(),number.getText()), a.getPassword());
+						try {//saving admin's data into the text file
+							Management m = new Management();
+							m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+","+name.getText()+","+surname.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
+									cCode.getText()+","+number.getText()+","+a.getPassword(),1);
+						} catch (QueueFull | IOException | QueueEmpty e1) {
+							e1.printStackTrace();
+						}
 					}
 					else {
-						try {
 						a.setRestaurant(new Restaurant(rName.getText(), 
 								new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 								new Phone(cCode.getText(),number.getText())));
-						
-							Management m= new Management();
-							
-							//m.FindLine(a.getID_admin(),a.getID_admin()+","+rName.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
-								//	cCode.getText()+","+number.getText());
-							m.selectfile(a.getID_admin()+","+rName.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
-								cCode.getText()+","+number.getText(),3);
-						} catch (QueueFull e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (QueueEmpty e1) {
-							// TODO Auto-generated catch block
+						try {//saving restaurant's data into the text file.
+							Management m = new Management();
+							m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+","+rName.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
+									cCode.getText()+","+number.getText()+","+a.getRestaurant().isShutDown(),3);
+						} catch (QueueFull | IOException | QueueEmpty e1) {
 							e1.printStackTrace();
 						}
-						
 					}
 					JOptionPane.showMessageDialog(getContentPane(),	"Your information has been changed.");
 					setVisible(false);
 					try {
 						AdminMenu aMenu = new AdminMenu(a);
 						aMenu.setVisible(true);
-					} catch (QueueEmpty e1) {
-					} catch (QueueFull e1) {
-					}
+					} catch (QueueEmpty | QueueFull e1) {e1.printStackTrace();}
 				}
 				else {
 					if(currentPassword.getText().equals(a.getPassword())) {//if old password entered correctly
 						if(passwordField.getText().equals(passwordField_1.getText())) {//if the new passwords correct
-							a.setUser(name.getText(), surname.getText(), new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
-									new Phone(cCode.getText(),number.getText()), passwordField.getText());
-							JOptionPane.showMessageDialog(getContentPane(),	"Your information and password has been changed.");
+							
+							try {//saving admin's data into the text file
+								Management m = new Management();
+								m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+","+name.getText()+","+surname.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
+										cCode.getText()+","+number.getText()+","+passwordField.getText(),1);
+							} catch (QueueFull | IOException | QueueEmpty e1) {
+								e1.printStackTrace();
+							}
 							setVisible(false);
 							try {
 								AdminMenu aMenu = new AdminMenu(a);
 								aMenu.setVisible(true);
-							} catch (QueueEmpty e1) {
-							} catch (QueueFull e1) {
-							}
-							
+							} catch (QueueEmpty | QueueFull e1) {e1.printStackTrace();}
+							a.setUser(name.getText(), surname.getText(), new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
+									new Phone(cCode.getText(),number.getText()), passwordField.getText());
+							JOptionPane.showMessageDialog(getContentPane(),	"Your information and password has been changed.");
 						}
 						else {
 							JOptionPane.showMessageDialog(getContentPane(),	"Something went wrong. You entered different passwords.");

@@ -4,6 +4,13 @@ public class Food {
 	private ArrayList<Restaurant>restaurant_list;  
 	private ArrayList<String> ingredients =new ArrayList<String>(); 
 	private int price;
+	private boolean isDeleted = false;
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 	public String getFood_name() {
 		return food_name;
 	}
@@ -35,6 +42,11 @@ public class Food {
 			restName+=restaurant_list.get(i).getRestaurant_name()+" ";
 		}
 		return food_name  + "-" + ingredients + "-" + price+ "-" + restName;
+	}
+	public String currentToString() {
+		String restName = "";
+		
+		return food_name  + "-" + ingredients + "-" + price;
 	}
 	public Food(String food_name, String ingredients, int price, Restaurant restaurant) {
 		this.food_name = food_name;

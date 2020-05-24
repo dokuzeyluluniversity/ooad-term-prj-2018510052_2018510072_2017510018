@@ -47,7 +47,7 @@ public class Customer extends User{
 		for (int i = 0; i < orders.size(); i++) {
 			for (int j = 0; j < orders.get(i).getRestaurant_list().size(); j++) {
 				if(orders.get(i).getRestaurant_list().get(j).getRestaurant_name().equals(r.getRestaurant_name()))
-					s= orders.get(i).toString();
+					s= orders.get(i).currentToString();
 			}
 		}
 		return s + "-" +getName() + "-" + getSurname() + "-" + getPhone()+ "-" + getAddress();

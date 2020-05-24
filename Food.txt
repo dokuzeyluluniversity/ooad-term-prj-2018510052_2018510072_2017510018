@@ -1,0 +1,10 @@
+1-makarna-kıyma,yağ,tuz-25-false
+1-lahmacun-kıyma,yağ,tuz-30-true
+1-salçalı makarna-salça,yağ,tuz-15-false
+1-alfredo soslu makarna-alfredo sos,yağ,tuz-45-false
+1-pizza-sucuk,zeytin,yeşil biber-35-false
+2-makarna-kıyma,yağ,tuz-29-false
+2-lahmacun-kıyma,yağ,tuz-20-false
+2-salçalı makarna-salça,yağ,tuz-15-false
+2-alfredo soslu makarna-alfredo sos,yağ,tuz-12-false
+2-pizza-sucuk,zeytin,yeşil biber-24-false

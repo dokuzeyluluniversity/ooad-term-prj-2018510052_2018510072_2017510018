@@ -37,19 +37,7 @@ public class Login extends JFrame {
 	private JCheckBox rdbtnAdmin ;
 	private JButton btnLogin;
 	private JButton btnSignup;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
+	
 
 
 	public  Login() {
@@ -144,8 +132,7 @@ public class Login extends JFrame {
 						{	
 							Start.setVisible(false);
 							Login.setVisible(false);
-							Customerframe cf=new Customerframe();
-							cf.FRAME( m.fList,m.cList,m.cList.get(m.findcustomerid(number, password)));
+							Customerframe cf=new Customerframe(m.aList,m.fList,m.cList,m.cList.get(m.findcustomerid(number, password)));
 							cf.setVisible(true);
 						}
 						else {
@@ -156,9 +143,9 @@ public class Login extends JFrame {
 					}
 					if(rdbtnAdmin.isSelected()) {
 						boolean enteradmin=m.searchAdmin(number, password);
-						if(enteradmin==true) {
+						if(enteradmin==true && !m.aList.get(m.findAdminid(number, password)).getRestaurant().isShutDown()) {
 							Start.setVisible(false);
-
+							System.out.println(m.aList.get(m.findAdminid(number, password)));
 							AdminMenu admin=new AdminMenu(m.aList.get(m.findAdminid(number, password)));
 							admin.setVisible(true);
 

@@ -1,1 +1,7 @@
-1,iremkÃ¼nefe31,iskenderun,,hatay,,90,3
+1,iremkünefe31,iskenderun,,hatay,,90,3,false
+4,dürümcü,iskenderun,,hatay,,90,3,false
+3,börekçi,,şişli,istanbul,,90,3,false
+2,baklavacı,109.sokak,şişli,istanbul,dönerci yanı,90,3,false
+5,sarıyer börekçisi,yeni mahalle,sarıyer,istanbul,cami yanı,90,345,false
+2,güllüoğlu,109.sokak,şişli,istanbul,dönerci yanı,90,3,false
+1,irem pastanesi,iskenderun,,izmir,,90,3,false
