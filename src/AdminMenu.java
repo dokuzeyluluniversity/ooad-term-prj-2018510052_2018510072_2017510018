@@ -46,7 +46,7 @@ public class AdminMenu extends JFrame {
 	 * Launch the application.
 	 * @throws QueueFull 
 	 */
-	
+
 
 	/**
 	 * Create the frame.
@@ -215,11 +215,11 @@ public class AdminMenu extends JFrame {
 		JMenuItem mnýtmSetUserInfo = new JMenuItem("Set User Information");
 		mnýtmSetUserInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				SetUserInfo frame = new SetUserInfo(a,true);
 				setVisible(false);
 				frame.setVisible(true);
-				
+
 			}
 		});
 		mnýtmSetUserInfo.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
@@ -249,15 +249,15 @@ public class AdminMenu extends JFrame {
 				}
 			}
 		});
-		
+
 		JMenuItem mnýtmBackToMain = new JMenuItem("Back to Main Menu");
 		mnýtmBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					setVisible(false);
-					Login l =new Login();
-			///////////////
+				setVisible(false);
+				Login l =new Login();
+				///////////////
 				l.setVisible(true);
-				
+
 			}
 		});
 		mnUser.add(mnýtmBackToMain);

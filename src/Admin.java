@@ -38,9 +38,9 @@ public class Admin extends User{
 		return "getName()=" + getName() + ", getSurname()=" + getSurname()
 		+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
 	}
-	public void createAdmin(int index,Admin ad, ArrayList<Admin> a) {
+	public void createAdmin(Admin ad, ArrayList<Admin> a) {
 	
-			a.add(index,ad);
+			a.add(ad);
 			count++;
 	
 	}

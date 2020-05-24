@@ -90,7 +90,7 @@ public class Management {
 
 				String sp[] =st.split(",");
 				Admin a=new Admin(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
-				a.createAdmin(a.getID_admin(),a, aList);
+				a.createAdmin(a, aList);
 
 			}
 

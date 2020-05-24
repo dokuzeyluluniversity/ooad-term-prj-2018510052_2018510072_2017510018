@@ -219,7 +219,7 @@ public class SignUp extends JFrame implements ActionListener {
 							String info=  tname.getText()+","+sname.getText()+","+textField_3.getText()+","+textField_2.getText()+","+
 									textField_1.getText()+","+textField.getText()+","+ctmno.getText()+","+tmno.getText()+","+passwordField.getText();
 							Admin newAdmin = new Admin(tname.getText(),sname.getText(),new Address(textField_3.getText(),textField_2.getText(),textField_1.getText(),textField.getText()),new Phone(ctmno.getText(),tmno.getText()),passwordField.getText());
-							newAdmin.createAdmin(newAdmin.getID_admin(),newAdmin, m.aList);
+							newAdmin.createAdmin(newAdmin, m.aList);
 							m.selectfile(newAdmin.getID_admin()+","+info,1);
 							
 							System.out.println(newAdmin.toString());

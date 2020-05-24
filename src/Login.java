@@ -132,43 +132,44 @@ public class Login extends JFrame {
 				Boolean flag=true;
 				Start.setVisible(false);
 				try {	
-				String number=textField.getText();
-				String password=textField_1.getText();
-				Management m=new Management();
+					String number=textField.getText();
+					String password=textField_1.getText();
+					Management m=new Management();
 
-				if(rdbtnCustomer.isSelected()) {
+					if(rdbtnCustomer.isSelected()) {
 
-					boolean entercustomer=m.searchCustomer(number, password);
-					System.out.println(entercustomer);
-					if(entercustomer==true)
-					{	
-						Start.setVisible(false);
-						Login.setVisible(false);
-						CustomerMenu mp = new CustomerMenu(number,password);
-						mp.getFrame().setVisible(true);
+						boolean entercustomer=m.searchCustomer(number, password);
+						System.out.println(entercustomer);
+						if(entercustomer==true)
+						{	
+							Start.setVisible(false);
+							Login.setVisible(false);
+							Customerframe cf=new Customerframe();
+							cf.FRAME( m.fList,m.cList,m.cList.get(m.findcustomerid(number, password)));
+							cf.setVisible(true);
+						}
+						else {
+							textField.setText("");
+							textField_1.setText("");
+							JOptionPane.showMessageDialog(Start, "Wrong password or phone number");
+						}
 					}
-					else {
-						textField.setText("");
-						textField_1.setText("");
-						JOptionPane.showMessageDialog(Start, "Wrong password or phone number");
-					}
-				}
-				if(rdbtnAdmin.isSelected()) {
-					boolean enteradmin=m.searchAdmin(number, password);
-					if(enteradmin==true) {
-						Start.setVisible(false);
-						
-						AdminMenu admin=new AdminMenu(m.aList.get(m.findAdminid(number, password)));
-						admin.setVisible(true);
-					
-					}
+					if(rdbtnAdmin.isSelected()) {
+						boolean enteradmin=m.searchAdmin(number, password);
+						if(enteradmin==true) {
+							Start.setVisible(false);
 
-					else {
-						textField.setText("");
-						textField_1.setText("");
-						JOptionPane.showMessageDialog(Start, "Wrong password or phone number");
+							AdminMenu admin=new AdminMenu(m.aList.get(m.findAdminid(number, password)));
+							admin.setVisible(true);
+
+						}
+
+						else {
+							textField.setText("");
+							textField_1.setText("");
+							JOptionPane.showMessageDialog(Start, "Wrong password or phone number");
+						}
 					}
-				}
 
 				} catch (QueueFull | IOException | QueueEmpty e) {
 					// TODO Auto-generated catch block
