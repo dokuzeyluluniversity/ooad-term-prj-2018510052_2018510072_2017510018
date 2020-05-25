@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class SetUserInfo extends JFrame {
+public class SetAdminInfo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField name;
@@ -51,12 +52,14 @@ public class SetUserInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SetUserInfo(Admin a, boolean isUser) {
+	public SetAdminInfo(Admin a, boolean isUser) {
 		setTitle(isUser?"SET USER INFORMATION":"SET RESTAURANT INFORMATION");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 667, 426);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(250, 128, 114));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 

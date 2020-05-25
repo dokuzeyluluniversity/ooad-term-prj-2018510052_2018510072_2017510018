@@ -1,9 +1,8 @@
 1,irem,okur,,,,,8,4,7
 2,irem,çalmaz,,,,,66,77,lütfü
-3,mellliiissssa,beyyysssü,,,,,56,123,0
-4,y,y,,,,,4,5,5r,önde,546,23
-5,melisa,beysümengü,109,esenyurt,istanbul,terzi karþýsý,90,1234,melisa
-3,ali,duran,109,esenyurt,istanbul,terzi karþýsý,90,1234,4321
-3,melisa,duran,109,esenyurt,istanbul,terzi karþýsý,90,1234,4321
-1,irem,beysümengü,,,istanbul,,8,4,32
-1,irem,beysümengü,,,istanbul,,8,4,32
+3,Ali,duran,109,esenyurt,istanbul,terzi karþýsý,+90,1234,4321
+4,Yaðmur,Önde,Eski lara,Muratpaþa,Antalya,Aras Sitesi,+90,05551234332,kelaynak
+5,Melisa,Beysümengü,109,esenyurt,istanbul,terzi karþýsý,90,1234,melisa
+3,Zelal,duran,109,esenyurt,istanbul,terzi karþýsý,+90,1234,4321
+1,irem,okur,Cumhuriyet,Ataþehir,istanbul,Sedef sitesi,+90,05532231362,meri
+6,Okan,Türkmen,Mustafa,Bornova,Ýzmir,,+90,12345,111

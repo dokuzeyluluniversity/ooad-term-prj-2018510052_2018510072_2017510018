@@ -43,17 +43,7 @@ public class AdminMenu extends JFrame {
 	private JTextField ingredients;
 	private JTextField price;
 
-	/**
-	 * Launch the application.
-	 * @throws QueueFull 
-	 */
-	
 
-	/**
-	 * Create the frame.
-	 * @throws QueueEmpty 
-	 * @throws QueueFull 
-	 */
 	public AdminMenu(Admin a) throws QueueEmpty, QueueFull {
 		setResizable(false);
 		setTitle("ONLINE FOOD SYSTEM");
@@ -88,7 +78,7 @@ public class AdminMenu extends JFrame {
 		customerTable = new JTable();
 		scrollPane.setViewportView(customerTable);
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		customerTable.setModel(new DefaultTableModel(cQueue,new String[] {"Order Name","ingredients","price", "Name", "Surname", "Phone", "Address"}));
+		customerTable.setModel(new DefaultTableModel(cQueue,new String[] {"Order Name","Restaurant Name","price", "Name", "Surname", "Phone", "Address"}));
 		//customerTable.getColumnModel().getColumn(0).setPreferredWidth(161);
 
 		JButton btnRemoveCustomer = new JButton("Remove Customer");
@@ -99,8 +89,13 @@ public class AdminMenu extends JFrame {
 				if(response == JOptionPane.YES_OPTION) {
 					JOptionPane.showMessageDialog(getContentPane(),	"Customer has been removed.");
 					try {
+						Management m =new Management();
+						m.fileUpdate("Orders.txt",  m.findAdminid(a.getPhone().getNumber(),a.getPassword())+";"
+								+m.findcustomerid(((Customer)a.getRestaurant().getCustomerqueue().peek()).getPhone().getNumber(), ((Customer)a.getRestaurant().getCustomerqueue().peek()).getPassword())+";"+
+								((Customer)a.getRestaurant().getCustomerqueue().peek()).getOrderedFood(a.getRestaurant())+";"+true	);
 						a.getRestaurant().getCustomerqueue().dequeue();
-					} catch (QueueEmpty e1) {
+
+					} catch (QueueEmpty | IOException | QueueFull e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -137,16 +132,16 @@ public class AdminMenu extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) foodMenu.getModel();
-				int selectedRow=0;
-				selectedRow = foodMenu.getSelectedRow();
+
+				try {
+					int selectedRow=0;
+					selectedRow = foodMenu.getSelectedRow();
 					JOptionPane.showMessageDialog(getContentPane(),	model.getValueAt(selectedRow, 0)+" is removed "+selectedRow);
 					model.removeRow(selectedRow);
-				try {
-					
 					Management m = new Management();
 					a.getRestaurant().getFood().get(selectedRow).setDeleted(true);
 					m.fileUpdate("Food.txt", m.findAdminid(a.getPhone().getNumber(),a.getPassword())+"-"+a.getRestaurant().getFood().get(selectedRow).toString().replace("[", "").replace("]", "").substring(0,a.getRestaurant().getFood().get(selectedRow).toString().replace("[", "").replace("]", "").lastIndexOf("-") )
-						+"-"+a.getRestaurant().getFood().get(selectedRow).isDeleted());
+							+"-"+a.getRestaurant().getFood().get(selectedRow).isDeleted());
 					a.getRestaurant().removeFood(a.getRestaurant().getFood().get(selectedRow));
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(getContentPane(),	"You should select a row to delete.");
@@ -195,20 +190,20 @@ public class AdminMenu extends JFrame {
 					JOptionPane.showMessageDialog(getContentPane(),	"You should fill all fields to add food.");
 				}
 				else {
-					
+
 					a.getRestaurant().getFood().add(new Food(fName.getText(), ingredients.getText(), Integer.parseInt(price.getText()), a.getRestaurant()));
 					DefaultTableModel model = (DefaultTableModel) foodMenu.getModel();
 					model.addRow(new Object[]{fName.getText(), ingredients.getText(), price.getText()});
 					JOptionPane.showMessageDialog(getContentPane(),	fName.getText()+ " is added into your menu.");
 					try {
 						Management m = new Management();
-						m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+"-"+fName.getText()+"-"+ingredients.getText()+"-"+Integer.parseInt(price.getText())+false, 4);
+						m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+"-"+fName.getText()+"-"+ingredients.getText()+"-"+Integer.parseInt(price.getText())+"-"+false, 4);
 					} catch (QueueFull |IOException |QueueEmpty e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} 
 					fName.setText("");ingredients.setText("");price.setText("");
-					
+
 				}
 			}
 		});
@@ -230,11 +225,11 @@ public class AdminMenu extends JFrame {
 		JMenuItem mnýtmSetUserInfo = new JMenuItem("Set User Information");
 		mnýtmSetUserInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				SetUserInfo frame = new SetUserInfo(a,true);
+
+				SetAdminInfo frame = new SetAdminInfo(a,true);
 				setVisible(false);
 				frame.setVisible(true);
-				
+
 			}
 		});
 		mnýtmSetUserInfo.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
@@ -243,7 +238,7 @@ public class AdminMenu extends JFrame {
 		JMenuItem mnýtmSetRestaurantInformation = new JMenuItem("Set Restaurant Information");
 		mnýtmSetRestaurantInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SetUserInfo frame = new SetUserInfo(a,false);
+				SetAdminInfo frame = new SetAdminInfo(a,false);
 				customerTable.removeAll();
 				setVisible(false);
 				frame.setVisible(true);
@@ -273,15 +268,15 @@ public class AdminMenu extends JFrame {
 				}
 			}
 		});
-		
-		JMenuItem mnýtmBackToMain = new JMenuItem("Back to Main Menu");
+
+		JMenuItem mnýtmBackToMain = new JMenuItem("LogOut");
 		mnýtmBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					setVisible(false);
-					Login l =new Login();
-			///////////////
+				setVisible(false);
+				Login l =new Login();
+				///////////////
 				l.setVisible(true);
-				
+
 			}
 		});
 		mnUser.add(mnýtmBackToMain);

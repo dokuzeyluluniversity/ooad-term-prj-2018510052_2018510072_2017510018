@@ -24,8 +24,6 @@ public class SignUp extends JFrame implements ActionListener {
 	private JCheckBox term; 
 	private JButton sub; 
 	private JButton reset; 
-	private JTextArea tout; 
-	private JTextArea resadd; 
 	private JLabel lblPassword;
 	private JLabel res;
 	private JLabel lblTown;
@@ -42,7 +40,7 @@ public class SignUp extends JFrame implements ActionListener {
 	{
 		getContentPane().setBackground(new Color(250, 128, 114)); 
 		setTitle("Sign Up"); 
-		setBounds(300, 90, 900, 600); 
+		setBounds(300, 90, 476, 600); 
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 		setResizable(false); 
 
@@ -52,7 +50,7 @@ public class SignUp extends JFrame implements ActionListener {
 		title = new JLabel("Sign Up"); 
 		title.setFont(new Font("Arial", Font.PLAIN, 30)); 
 		title.setSize(300, 30); 
-		title.setLocation(300, 16); 
+		title.setLocation(200, 16); 
 		c.add(title); 
 
 		name = new JLabel("Name*"); 
@@ -63,7 +61,7 @@ public class SignUp extends JFrame implements ActionListener {
 
 		tname = new JTextField(); 
 		tname.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		tname.setSize(190, 20); 
+		tname.setSize(190, 30); 
 		tname.setLocation(200, 100); 
 		c.add(tname); 
 
@@ -75,79 +73,64 @@ public class SignUp extends JFrame implements ActionListener {
 
 		sname = new JTextField(); 
 		sname.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		sname.setSize(190, 20); 
-		sname.setLocation(200, 150); 
+		sname.setSize(190, 30); 
+		sname.setLocation(200, 140); 
 		c.add(sname); 
 
 
 		cmno = new JLabel("Country Code*"); 
-		cmno.setFont(new Font("Arial", Font.PLAIN, 20)); 
+		cmno.setFont(new Font("Arial", Font.PLAIN, 10)); 
 		cmno.setSize(150, 20); 
-		cmno.setLocation(70, 198); 
+		cmno.setLocation(200, 170); 
 		c.add(cmno); 
 
 		ctmno = new JTextField(); 
 		ctmno.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		ctmno.setSize(50, 20); 
-		ctmno.setLocation(200, 200); 
+		ctmno.setSize(50, 30); 
+		ctmno.setLocation(200, 190); 
 		c.add(ctmno); 
 
 		mno = new JLabel("Phone Number*"); 
-		mno.setFont(new Font("Arial", Font.PLAIN, 20)); 
-		mno.setSize(150, 20); 
-		mno.setLocation(70, 220); 
+		mno.setFont(new Font("Arial", Font.PLAIN, 10)); 
+		mno.setSize(94, 20); 
+		mno.setLocation(312, 170); 
 		c.add(mno); 
 
 		tmno = new JTextField(); 
 		tmno.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		tmno.setSize(190, 20); 
-		tmno.setLocation(260, 200); 
+		tmno.setSize(130, 30); 
+		tmno.setLocation(260, 190); 
 		c.add(tmno); 
 
 		add = new JLabel("Street"); 
 		add.setFont(new Font("Arial", Font.PLAIN, 20)); 
 		add.setSize(100, 20); 
-		add.setLocation(70, 297); 
+		add.setLocation(70, 277); 
 		c.add(add);
 
 		term = new JCheckBox("Accept Terms And Conditions."); 
 		term.setFont(new Font("Arial", Font.PLAIN, 15)); 
 		term.setSize(250, 20); 
-		term.setLocation(150, 460); 
+		term.setLocation(106, 474); 
 		c.add(term); 
 
 		sub = new JButton("Sign Up"); 
 		sub.setFont(new Font("Arial", Font.PLAIN, 15)); 
 		sub.setSize(100, 20); 
-		sub.setLocation(150, 504); 
+		sub.setLocation(106, 506); 
 		sub.addActionListener(this); 
 		c.add(sub); 
 
 		reset = new JButton("Reset"); 
 		reset.setFont(new Font("Arial", Font.PLAIN, 15)); 
 		reset.setSize(100, 20); 
-		reset.setLocation(300, 504); 
+		reset.setLocation(256, 506); 
 		reset.addActionListener(this); 
-		c.add(reset); 
-
-		tout = new JTextArea(); 
-		tout.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		tout.setSize(300, 400); 
-		tout.setLocation(500, 100); 
-		tout.setLineWrap(true); 
-		tout.setEditable(false); 
-		c.add(tout);
-
-		resadd = new JTextArea(); 
-		resadd.setFont(new Font("Arial", Font.PLAIN, 15)); 
-		resadd.setSize(200, 75); 
-		resadd.setLocation(580, 175); 
-		resadd.setLineWrap(true); 
-		c.add(resadd);
+		c.add(reset);
 
 		lblPassword = new JLabel("Password*");
 		lblPassword.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPassword.setBounds(70, 256, 121, 20);
+		lblPassword.setBounds(70, 236, 121, 20);
 		getContentPane().add(lblPassword);
 
 		res = new JLabel("");
@@ -156,50 +139,55 @@ public class SignUp extends JFrame implements ActionListener {
 
 		lblTown = new JLabel("Town");
 		lblTown.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblTown.setBounds(70, 338, 69, 20);
+		lblTown.setBounds(70, 318, 69, 20);
 		getContentPane().add(lblTown);
 
 		lblCity = new JLabel("City");
 		lblCity.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblCity.setBounds(70, 386, 69, 20);
+		lblCity.setBounds(70, 366, 69, 20);
 		getContentPane().add(lblCity);
 
 		lblDescription = new JLabel("Description");
 		lblDescription.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblDescription.setBounds(70, 422, 121, 24);
+		lblDescription.setBounds(70, 402, 121, 24);
 		getContentPane().add(lblDescription);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(200, 256, 106, 26);
+		passwordField.setBounds(200, 236, 190, 26);
 		getContentPane().add(passwordField);
 
 		textField = new JTextField();
-		textField.setBounds(200, 422, 216, 26);
+		textField.setBounds(200, 402, 190, 26);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(200, 380, 146, 26);
+		textField_1.setBounds(200, 360, 190, 26);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
 		textField_2 = new JTextField();
-		textField_2.setBounds(200, 336, 146, 26);
+		textField_2.setBounds(200, 316, 190, 26);
 		getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setBounds(200, 298, 146, 26);
+		textField_3.setBounds(200, 278, 190, 26);
 		getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 
 		rdbtnNewRadioButton = new JRadioButton("Admin");
-		rdbtnNewRadioButton.setBounds(70, 59, 155, 29);
+		rdbtnNewRadioButton.setBounds(70, 59, 150, 29);
 		getContentPane().add(rdbtnNewRadioButton);
 
 		rdbtnNewRadioButton_1 = new JRadioButton("Customer");
-		rdbtnNewRadioButton_1.setBounds(271, 59, 155, 29);
+		rdbtnNewRadioButton_1.setBounds(232, 58, 155, 29);
 		getContentPane().add(rdbtnNewRadioButton_1);
+		
+		JLabel lblNumber = new JLabel("Number*");
+		lblNumber.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNumber.setBounds(70, 200, 100, 20);
+		getContentPane().add(lblNumber);
 
 		setVisible(true); 
 	} 
@@ -220,9 +208,8 @@ public class SignUp extends JFrame implements ActionListener {
 									textField_1.getText()+","+textField.getText()+","+ctmno.getText()+","+tmno.getText()+","+passwordField.getText();
 							Admin newAdmin = new Admin(tname.getText(),sname.getText(),new Address(textField_3.getText(),textField_2.getText(),textField_1.getText(),textField.getText()),new Phone(ctmno.getText(),tmno.getText()),passwordField.getText());
 							newAdmin.createAdmin(newAdmin, m.aList);
-							m.selectfile(newAdmin.getID_admin()+","+info,1);
-							
-							System.out.println(newAdmin.toString());
+							m.selectfile(m.findAdminid(newAdmin.getPhone().getNumber(),newAdmin.getPassword() )+","+info,1);
+				
 
 						}
 						else if (rdbtnNewRadioButton_1.isSelected()) {
@@ -233,12 +220,11 @@ public class SignUp extends JFrame implements ActionListener {
 							
 							Customer newCustomer = new Customer(tname.getText(),sname.getText(),new Address(textField_3.getText(),textField_2.getText(),textField_1.getText(),textField.getText()),new Phone(ctmno.getText(),tmno.getText()),passwordField.getText());
 							newCustomer.CreateCustomer(newCustomer, m.cList);
-							m.selectfile(newCustomer.getID_customer()+","+info,2);
+						m.selectfile(m.findcustomerid(newCustomer.getPhone().getNumber(),newCustomer.getPassword() )+","+info,2);
 						
-							System.out.println(m.cList.toString());
+					
 						}
-						tout.setText(data ); 
-						tout.setEditable(false); 
+						
 						res.setText("Sign Up Successfully!"); 
 						setVisible(false);
 						Login l=new Login();
@@ -249,8 +235,7 @@ public class SignUp extends JFrame implements ActionListener {
 					}
 				} 
 				else { 
-					tout.setText(""); 
-					resadd.setText(""); 
+				
 					res.setText("Please accept the terms & conditions!"); 
 				} 
 			}
@@ -272,9 +257,7 @@ public class SignUp extends JFrame implements ActionListener {
 			tmno.setText(def); 
 			ctmno.setText(def); 
 			res.setText(def); 
-			tout.setText(def); 
-			term.setSelected(false); 
-			resadd.setText(def); 
+			term.setSelected(false); 		
 			passwordField.setText(def);
 			textField.setText(def);
 			textField_1.setText(def);
@@ -282,10 +265,5 @@ public class SignUp extends JFrame implements ActionListener {
 			textField_3.setText(def);
 		} 
 	} 
-
-
-
 } 
-
-
 

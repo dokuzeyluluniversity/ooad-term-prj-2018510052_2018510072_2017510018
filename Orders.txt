@@ -1,2 +1,10 @@
+2;1;pizza;sucuk,zeytin,yesil biber;24;false
+2;1;makarna;irem pastanesi ;25;false
+2;1;lahmacun;güllüoðlu ;20;true
 
-2;0;pizza;sucuk,zeytin,yesil biber;24
+3;1;Çemenli;börekçi ;3;false
+4;2;Kebap;dürümcü ;18;false
+5;2;Su Böreði;sarýyer börekçisi ;10;false
+6;3;Tavuk Pilav;3E cafe ;11;false
+1;4;makarna;irem pastanesi ;25;false
+4;5;Kebap;dürümcü ;18;false

@@ -19,12 +19,29 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Customerframe extends JFrame {
 
-
+	
+	private  JFrame  Restaurantlist;
+	private  JFrame SetCustomerInfo;
+	private  JFrame GiveOrder;
+	private JPanel contentPane2;
+	private JPanel contentPane1;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JLabel lblDescription;
+	private JTextField textField_8;
+	
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
@@ -39,14 +56,7 @@ public class Customerframe extends JFrame {
 	private JTextField food;
 	DefaultTableModel model;
 	private JTable table_2;
-	/**
-	 * Launch the application.
-	 */
 
-
-	/**
-	 * Create the frame.
-	 */
 	public Customerframe(ArrayList<Admin> aList,ArrayList<Food> fList,ArrayList<Customer> cList,Customer c) {
 
 		setTitle("Customer");
@@ -99,26 +109,7 @@ public class Customerframe extends JFrame {
 		for (int i = 0; i < allfood.length  ; i++) {
 
 			allfood[i]=fList.get(i).toString().split("-");
-			/*	String s="makarna,irem,tuz,3";
-			String [] sp=s.split(",");
-			allfood[0][0]=sp[0];
-			allfood[0][1]=sp[1];
-			allfood[0][2]=sp[2];
-			allfood[0][3]=sp[3];
-			String s2="çorba,irem,tuz,44";
-			String [] sp2=s2.split(",");
-			allfood[1][0]=sp2[0];
-			allfood[1][1]=sp2[1];
-			allfood[1][2]=sp2[2];
-			allfood[1][3]=sp2[3];
-			String s3="makarna,irem,tuz,30";
-			String [] sp3=s3.split(",");
-			allfood[2][0]=sp3[0];
-			allfood[2][1]=sp3[1];
-			allfood[2][2]=sp3[2];
-			allfood[2][3]=sp3[3];
-
-			 */
+		
 		}
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
@@ -141,7 +132,7 @@ public class Customerframe extends JFrame {
 
 				for (int j = 0; j < c.getOrders().size(); j++) {
 					DefaultTableModel model2 = (DefaultTableModel) table.getModel();
-					model2.addRow(new Object[]{c.getOrders().get(j)});
+					model2.addRow(((Food)c.getOrders().get(j)).toString().split("-"));
 				}
 
 			}
@@ -159,10 +150,10 @@ public class Customerframe extends JFrame {
 						if(((String)table_1.getValueAt(selectedRow, 3)).trim().equals(aList.get(i).getRestaurant().getRestaurant_name().trim())) {
 							Management m = new Management();
 							m.selectfile(m.findAdminid(aList.get(i).getPhone().getNumber(), aList.get(i).getPassword())+";"+m.findcustomerid(c.getPhone().getNumber(), c.getPassword())+";"+
-									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 3)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2), 5);
+									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 3)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2)+";"+false, 5);
 							
 							aList.get(i).getRestaurant().setCustomerqueue(c);
-							//System.out.println(cList.get(c.getID_customer()).getName());
+							
 							c.setOrders(aList.get(i).getRestaurant().FindFood(aList.get(i).getRestaurant(), food.getText()));
 							JOptionPane.showMessageDialog(getContentPane(),	"Your order has been received!");
 							
@@ -199,7 +190,15 @@ public class Customerframe extends JFrame {
 
 		mnýtmSetUserInformation = new JMenuItem("Set User Information");
 		mnNewMenu.add(mnýtmSetUserInformation);
-
+		mnýtmSetUserInformation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				SetCustomerInfo sc=new SetCustomerInfo(c);
+				setVisible(false);
+				sc.setVisible(true);
+				
+			}
+		});
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Search Food", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.setBounds(562, 32, 343, 200);
@@ -274,4 +273,7 @@ public class Customerframe extends JFrame {
 				));
 		scrollPane_2.setViewportView(table_2);
 	}
+	
+	
+
 }

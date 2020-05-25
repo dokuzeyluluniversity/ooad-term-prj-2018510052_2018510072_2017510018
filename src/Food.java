@@ -44,7 +44,7 @@ public class Food {
 		return food_name  + "-" + ingredients + "-" + price+ "-" + restName;
 	}
 	public String currentToString() {
-		String restName = "";
+	
 		
 		return food_name  + "-" + ingredients + "-" + price;
 	}

@@ -127,7 +127,7 @@ public class Login extends JFrame {
 					if(rdbtnCustomer.isSelected()) {
 
 						boolean entercustomer=m.searchCustomer(number, password);
-						System.out.println(entercustomer);
+						
 						if(entercustomer==true)
 						{	
 							Start.setVisible(false);
