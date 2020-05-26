@@ -36,8 +36,11 @@ public class SignUp extends JFrame implements ActionListener {
 	private JTextField textField_3;
 	private JRadioButton rdbtnNewRadioButton_1;
 
-	public SignUp() 
-	{
+	//the classes that has frames inside it designed with WindowBuilder Editor so we mostly edited the action performed part of the code.
+	//this class created for the new user of the system. we are taking the essential informations from the users such as phone number name surname and password.
+	//the user enters the system with his phone number so it is necessary for them to give us the informations. when the user does not enter his/her required information
+	//the system does not allow him/her to do continue the sign up process.
+	public SignUp() {
 		getContentPane().setBackground(new Color(250, 128, 114)); 
 		setTitle("Sign Up"); 
 		setBounds(300, 90, 476, 600); 
@@ -183,7 +186,7 @@ public class SignUp extends JFrame implements ActionListener {
 		rdbtnNewRadioButton_1 = new JRadioButton("Customer");
 		rdbtnNewRadioButton_1.setBounds(232, 58, 155, 29);
 		getContentPane().add(rdbtnNewRadioButton_1);
-		
+
 		JLabel lblNumber = new JLabel("Number*");
 		lblNumber.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNumber.setBounds(70, 200, 100, 20);
@@ -192,77 +195,62 @@ public class SignUp extends JFrame implements ActionListener {
 		setVisible(true); 
 	} 
 
-	public void actionPerformed(ActionEvent e) 
-	{ 
-		if (e.getSource() == sub) { 
+	public void actionPerformed(ActionEvent e) { 
+		if (e.getSource() == sub) { //if the user presses sign up button
+			//if the user enters the essential ones of the text field this part of the code works.
 			if(!(tname.getText().equals("")||sname.getText().equals("")||ctmno.getText().equals("")||tmno.getText().equals("")||passwordField.getText().equals(""))) {
-				if (term.isSelected()) { 
-
+				if (term.isSelected()) { //if the user accepts terms and the conditions this part of the code works
 					try {
 						Management m = new Management();
-						String data=  "Phone Number : "+ ctmno.getText()+"\t"+tmno.getText() + "\n"
-								+"Password : "+passwordField.getText()+"\n";
-						if(rdbtnNewRadioButton.isSelected())
-						{
+						if(rdbtnNewRadioButton.isSelected()){//adding new admin to the system
+							//taking all of the data s/he entered
 							String info=  tname.getText()+","+sname.getText()+","+textField_3.getText()+","+textField_2.getText()+","+
 									textField_1.getText()+","+textField.getText()+","+ctmno.getText()+","+tmno.getText()+","+passwordField.getText();
+							//creating new admin
 							Admin newAdmin = new Admin(tname.getText(),sname.getText(),new Address(textField_3.getText(),textField_2.getText(),textField_1.getText(),textField.getText()),new Phone(ctmno.getText(),tmno.getText()),passwordField.getText());
+							//adding new admin to the aList array List
 							newAdmin.createAdmin(newAdmin, m.aList);
+							//recording admin's data in the Admin.txt file.
 							m.selectfile(m.findAdminid(newAdmin.getPhone().getNumber(),newAdmin.getPassword() )+","+info,1);
-				
-
 						}
-						else if (rdbtnNewRadioButton_1.isSelected()) {
-
+						else if (rdbtnNewRadioButton_1.isSelected()) {//adding new customer to the system.
+							//taking all of the data s/he entered
 							String info=  tname.getText()+","+sname.getText()+","+textField_3.getText()+","+textField_2.getText()+","+
 									textField_1.getText()+","+textField.getText()+","+ctmno.getText()+","+tmno.getText()+","+passwordField.getText();
-
-							
+							//creating new customer
 							Customer newCustomer = new Customer(tname.getText(),sname.getText(),new Address(textField_3.getText(),textField_2.getText(),textField_1.getText(),textField.getText()),new Phone(ctmno.getText(),tmno.getText()),passwordField.getText());
+							//adding new customer to the cList array List
 							newCustomer.CreateCustomer(newCustomer, m.cList);
-						m.selectfile(m.findcustomerid(newCustomer.getPhone().getNumber(),newCustomer.getPassword() )+","+info,2);
-						
-					
+							//recording custom's data in the Customer.txt file.
+							m.selectfile(m.findcustomerid(newCustomer.getPhone().getNumber(),newCustomer.getPassword() )+","+info,2);
 						}
-						
+						//sign up is completed showing a message box to the user and returning to the log in page.
 						res.setText("Sign Up Successfully!"); 
 						setVisible(false);
 						Login l=new Login();
 
 					} catch (QueueFull | IOException | QueueEmpty e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				} 
 				else { 
-				
 					res.setText("Please accept the terms & conditions!"); 
 				} 
 			}
-			else {
-				tname.setText("");
-				sname.setText("");
-				ctmno.setText("");
-				tmno.setText("");
-				passwordField.setText("");
-				textField.setText("");
-				textField_1.setText("");
+			else {//clearing all of the text fields because user dd not entered the essential ones.
+				tname.setText("");ctmno.setText("");
+				sname.setText("");tmno.setText("");
+				passwordField.setText("");textField.setText("");textField_1.setText("");
 				JOptionPane.showMessageDialog(getContentPane(),	"Fill the * ones");
 			}
 		}
-		else if (e.getSource() == reset) { 
+		else if (e.getSource() == reset) { //if user wants to reset all of the text fields this part of the code works.
 			String def = ""; 
-			tname.setText(def); 
-			sname.setText(def); 
-			tmno.setText(def); 
-			ctmno.setText(def); 
-			res.setText(def); 
-			term.setSelected(false); 		
-			passwordField.setText(def);
-			textField.setText(def);
-			textField_1.setText(def);
-			textField_2.setText(def);
-			textField_3.setText(def);
+			tname.setText(def); sname.setText(def); 
+			tmno.setText(def); ctmno.setText(def);
+			res.setText(def); term.setSelected(false);
+			passwordField.setText(def);textField.setText(def);
+			textField_1.setText(def);textField_2.setText(def);textField_3.setText(def);
 		} 
 	} 
 } 

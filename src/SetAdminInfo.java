@@ -52,11 +52,17 @@ public class SetAdminInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	//the classes that has frames inside it designed with WindowBuilder Editor so we mostly edited the action performed part of the code.
+	//this class mainly used by AdminMenu frame. user and REstaurant settings done in here. the constructor of this class wants an admin object and a boolean
+	//called isUSer. the boolean helps the program decide which tasks will be done. if the admin wants to change his/her information the value of the boolean
+	//must be true, otherwise if the admin wants to change the restaurant's information boolean must be false. each time s/he entered this part of the code the
+	//user has to enter his/her password to save everything.
 	public SetAdminInfo(Admin a, boolean isUser) {
 		setTitle(isUser?"SET USER INFORMATION":"SET RESTAURANT INFORMATION");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 667, 426);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(new Color(250, 128, 114));
@@ -193,6 +199,7 @@ public class SetAdminInfo extends JFrame {
 		panel.add(separator_1);
 
 		btnSave = new JButton("Save");
+		//at the beginning of the frame we want to show the admin the information s/he gave us before so we are setting the text fields here.
 		if(isUser) {
 			name.setText(a.getName());surname.setText(a.getSurname());cCode.setText(a.getPhone().getCountry_code());number.setText(a.getPhone().getNumber());
 			street.setText(a.getAddress().getStreetName());town.setText(a.getAddress().getTown());city.setText(a.getAddress().getCity());description.setText(a.getAddress().getDescription());
@@ -202,12 +209,13 @@ public class SetAdminInfo extends JFrame {
 			street.setText(a.getRestaurant().getAddress().getStreetName());town.setText(a.getRestaurant().getAddress().getTown());city.setText(a.getRestaurant().getAddress().getCity());description.setText(a.getRestaurant().getAddress().getDescription());
 		}
 
-
+		//at this part of the code the changes that the admin make is recording to the files.
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(passwordField.getText()+" "+passwordField_1.getText()+" "+currentPassword.getText());
+				//controlling the password fields because admin has to enter the right password to change his/her information
 				if(passwordField.getText().equals("")&&passwordField_1.getText().equals("")&&currentPassword.getText().equals(a.getPassword())) {//if the password hasn't changed.
 					if(isUser) {
+						//admin's information setting part.
 						a.setUser(name.getText(), surname.getText(), new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 								new Phone(cCode.getText(),number.getText()), a.getPassword());
 						try {//saving admin's data into the text file
@@ -218,8 +226,8 @@ public class SetAdminInfo extends JFrame {
 							e1.printStackTrace();
 						}
 					}
-					else {
-						a.setRestaurant(new Restaurant(rName.getText(), 
+					else {//if the boolean false then we are changing the restaurant's data
+						a.setRestaurant(new Restaurant(rName.getText(), //restaurants information setting part.
 								new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 								new Phone(cCode.getText(),number.getText())));
 						try {//saving restaurant's data into the text file.
@@ -230,17 +238,19 @@ public class SetAdminInfo extends JFrame {
 							e1.printStackTrace();
 						}
 					}
+					//showing user a information box to inform.
 					JOptionPane.showMessageDialog(getContentPane(),	"Your information has been changed.");
-					setVisible(false);
+					setVisible(false);//closing current frame
 					try {
+						//opening admin menu frame again because we are done in here.
 						AdminMenu aMenu = new AdminMenu(a);
 						aMenu.setVisible(true);
 					} catch (QueueEmpty | QueueFull e1) {e1.printStackTrace();}
 				}
-				else {
+				else {//at this part the program understands that the user wants to change his/her password too. so the system makes its changes accordingly.
 					if(currentPassword.getText().equals(a.getPassword())) {//if old password entered correctly
 						if(passwordField.getText().equals(passwordField_1.getText())) {//if the new passwords correct
-							
+
 							try {//saving admin's data into the text file
 								Management m = new Management();
 								m.selectfile(m.findAdminid(a.getPhone().getNumber(),a.getPassword())+","+name.getText()+","+surname.getText()+","+	street.getText()+","+town.getText()+","+city.getText()+","+description.getText()+","+ 
@@ -248,16 +258,19 @@ public class SetAdminInfo extends JFrame {
 							} catch (QueueFull | IOException | QueueEmpty e1) {
 								e1.printStackTrace();
 							}
-							setVisible(false);
+							setVisible(false);//closing current frame because we are done here for now.
 							try {
-								AdminMenu aMenu = new AdminMenu(a);
+								AdminMenu aMenu = new AdminMenu(a);//opening admin menu frame again
 								aMenu.setVisible(true);
 							} catch (QueueEmpty | QueueFull e1) {e1.printStackTrace();}
+							//setting admin's information with the password
 							a.setUser(name.getText(), surname.getText(), new Address(street.getText(),town.getText(),city.getText(),description.getText()), 
 									new Phone(cCode.getText(),number.getText()), passwordField.getText());
 							JOptionPane.showMessageDialog(getContentPane(),	"Your information and password has been changed.");
 						}
 						else {
+							//if the new passwords entered differently a message box shows up to the admin and wants him/her to re enter them again.
+							//before reentering the system clears the password fields.
 							JOptionPane.showMessageDialog(getContentPane(),	"Something went wrong. You entered different passwords.");
 							currentPassword.setText("");passwordField.setText("");passwordField_1.setText("");
 						}

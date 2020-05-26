@@ -36,6 +36,7 @@ public class Food {
 		this.price = price;
 	}
 	@Override
+	//to string method to get all attributes of a food.
 	public String toString() {
 		String restName = "";
 		for (int i = 0; i < restaurant_list.size(); i++) {
@@ -44,8 +45,6 @@ public class Food {
 		return food_name  + "-" + ingredients + "-" + price+ "-" + restName;
 	}
 	public String currentToString() {
-	
-		
 		return food_name  + "-" + ingredients + "-" + price;
 	}
 	public Food(String food_name, String ingredients, int price, Restaurant restaurant) {
@@ -55,6 +54,7 @@ public class Food {
 		this.price = price;
 		
 	}
+	//adding a restaurant to the restaurant list.
 	public void addRestaurant(Restaurant rest) {
 		restaurant_list = new ArrayList<Restaurant>();
 		restaurant_list.add(rest);

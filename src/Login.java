@@ -40,6 +40,9 @@ public class Login extends JFrame {
 	
 
 
+	//the classes that has frames inside it designed with WindowBuilder Editor so we mostly edited the action performed part of the code.
+	//in this class we mainly show user 3 options admin login, customer login, sign up
+	//three buttons directly take users to the LoginPage frame and wants user to enter phone number and password.
 	public  Login() {
 
 		Login = new JFrame();
@@ -82,13 +85,13 @@ public class Login extends JFrame {
 				else
 					JOptionPane.showMessageDialog(Login, "CHOOSE");}
 		});
-
+		//sign up button activates when it is clicked so when user clicks it system opens a new frame from signUp class
+		//and sets the visibility of the current class false.
 		btnSignup.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 
 				Login.setVisible(false);
-
 				SignUp sn = new SignUp();
 				sn.setVisible(true);
 
@@ -99,9 +102,9 @@ public class Login extends JFrame {
 
 
 	}
+	
 	public void LoginPage() {
 		Start = new JFrame();
-
 		Start.getContentPane().setBackground(new Color(250, 128, 114));
 		Start.setBounds(300, 90, 900, 600);
 
@@ -115,7 +118,8 @@ public class Login extends JFrame {
 		Start.getContentPane().add(btnLogn);
 
 		btnLogn.addActionListener(new ActionListener() {
-
+			//this part of the code work when the user chooses admin or customer. controls if they entered the phone number and password correctly and 
+			//take the user adminMenu frame or Customerframe frame
 			public void actionPerformed(ActionEvent arg0) {
 				Boolean flag=true;
 				Start.setVisible(false);
@@ -150,16 +154,13 @@ public class Login extends JFrame {
 							admin.setVisible(true);
 
 						}
-
 						else {
 							textField.setText("");
 							textField_1.setText("");
 							JOptionPane.showMessageDialog(Start, "Wrong password or phone number");
 						}
 					}
-
 				} catch (QueueFull | IOException | QueueEmpty e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -188,6 +189,7 @@ public class Login extends JFrame {
 		Start.setVisible(true);
 
 	}
+
 	public JFrame getStart() {
 		return Start;
 	}

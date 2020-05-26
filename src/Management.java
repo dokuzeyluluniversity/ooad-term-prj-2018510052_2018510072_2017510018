@@ -17,42 +17,39 @@ public class Management {
 	public ArrayList<Food> rList = new ArrayList<Food>();
 
 	Management() throws QueueFull, IOException, QueueEmpty{
-
+		//first elements of the aList and cList are filled with empty users. it is added for us to understand the working process of the code clearly
 		aList.add(new Admin("", "", new Address("", "", "", ""), new Phone("", ""), ""));
 		cList.add(new Customer("", "", new Address("", "", "", ""), new Phone("", ""), ""));
+		//at the take data part the text files opened and the informations in it added into the system
 		takeData();
 
 	}
-	public void selectfile(String User,int i) throws IOException
-	{
-		if(i==1)
-		{
+	
+	//select file method helps the program to add new informations to the files.
+	public void selectfile(String User,int i) throws IOException{
+		if(i==1){
 			File file =new File("Admin.txt");//1
 			writeFile(User,file);
-
 		}
-		else if(i==2)
-		{    File cust =new File("Customers.txt");//2
-		writeFile(User,cust);
-
+		else if(i==2){    
+			File cust =new File("Customers.txt");//2
+			writeFile(User,cust);
 		}
-		else if(i==3)
-		{   File ord =new File("Restaurant.txt");
-		writeFile(User,ord);
-
+		else if(i==3){   
+			File ord =new File("Restaurant.txt");//3
+			writeFile(User,ord);
 		}
-		else if(i==4)
-		{   File ord =new File("Food.txt");
-		writeFile(User,ord);
-
+		else if(i==4){   
+			File ord =new File("Food.txt");//4
+			writeFile(User,ord);
 		}
-		else if(i==5)
-		{   File ord =new File("Orders.txt");
-		writeFile(User,ord);
-
+		else if(i==5){   
+			File ord =new File("Orders.txt");//5
+			writeFile(User,ord);
 		}
-
 	}
+	
+	//writes the information to the desired file.
 	public void writeFile(String text,File fileName) throws IOException {
 
 		BufferedWriter writer = new BufferedWriter(
@@ -65,28 +62,23 @@ public class Management {
 	}
 
 
-
-	public void takeData() throws IOException,  QueueFull
-	{
+	//implemented for taking data from the text files. basically all files read starting with admin, customer, restaurant, food and order and the data inside them
+	//added into the Admin Customer Restaurants.
+	public void takeData() throws IOException,  QueueFull{
 
 		File f =new File("Admin.txt");
-		if(!f.exists())
-		{
+		if(!f.exists()){
 			f.createNewFile();
 		}
 		BufferedReader br = new BufferedReader(new FileReader(f)); 
-
 		String st; 
 		while ((st = br.readLine()) != null) {
-			if(!st.equals(""))
-			{
+			if(!st.equals("")){
 
 				String sp[] =st.split(",");
 				Admin a=new Admin(sp[1],sp[2],new Address(sp[3],sp[4],sp[5],sp[6]),new Phone(sp[7],sp[8]),sp[9]);
-				//a.createAdmin(a.getID_admin(),a, aList);
 				if(Integer.valueOf(sp[0])<aList.size()) {
 					aList.remove(aList.get(Integer.valueOf(sp[0])));
-					//aList.remove(Integer.valueOf(sp[0]));
 					aList.add(Integer.valueOf(sp[0]), a);
 
 				}
@@ -204,7 +196,10 @@ public class Management {
 
 
 	}
-
+	
+	//fileUpdate method helps us to update the files we are using it only in the food and Order text files. it reads the files line by line and adds into a arraylist.
+	//after that array list's elements controlled element by element and when we find the information we desired the program changes it and writes all the data
+	//again too the text file.
 	public void fileUpdate(String fName,String line) throws IOException {
 		File inputFile = new File(fName);
 		BufferedReader br4 = new BufferedReader(new FileReader(inputFile)); 
@@ -240,7 +235,8 @@ public class Management {
 
 
 	}
-
+	
+	//if the customer is exists in the system returns true.
 	public Boolean searchCustomer(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 		boolean enter = false;
 
@@ -254,7 +250,7 @@ public class Management {
 		return enter;
 	}
 
-
+	//returns the desired customer's id to the program.
 	public int findcustomerid(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 		boolean enter = false;
 
@@ -268,7 +264,7 @@ public class Management {
 		}
 		return customerid;
 	}
-
+	//if the admin is exists in the system returns true.
 	public Boolean searchAdmin(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 
 		boolean enter = false;
@@ -282,7 +278,7 @@ public class Management {
 		}
 		return enter;
 	}
-
+	//returns the desired admin's id to the program.
 	public int findAdminid(String phone,String password) throws QueueFull, IOException, QueueEmpty {
 
 		boolean enter = false;

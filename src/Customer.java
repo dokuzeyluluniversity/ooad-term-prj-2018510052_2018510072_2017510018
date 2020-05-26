@@ -38,10 +38,12 @@ public class Customer extends User{
 	public String toString() {
 		return "orders=" + orders + "-" + getName() + "-" + getSurname() + "-" + getPhone()+ "-" + getAddress() ;
 	}
+	//adds the customer into the customer array list
 	public void CreateCustomer(Customer c, ArrayList<Customer> a) {
 		a.add(c);
 		count++;
 	}
+	//returns the current ordered food as string. mainly used in the AdminMenu class for customer JTable 
 	public String getCurrentOrderedFood(Restaurant r) {
 		String s= "";
 		for (int i = 0; i < orders.size(); i++) {
@@ -52,7 +54,7 @@ public class Customer extends User{
 		}
 		return s + "-" +getName() + "-" + getSurname() + "-" + getPhone()+ "-" + getAddress();
 	}
-
+	//returns the customers ordered foods. only food name ingredient price and the restaurant name.
 	public String getOrderedFood(Restaurant r) {
 		String s= "";
 		for (int i = 0; i < orders.size(); i++) {

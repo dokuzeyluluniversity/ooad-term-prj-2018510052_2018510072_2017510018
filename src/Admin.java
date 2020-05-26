@@ -9,6 +9,7 @@ public class Admin extends User{
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
+	//setRestaurant method is useful when the admin changes its address phone etc.
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant.setAddress(restaurant.getAddress());
 		this.restaurant.setPhone(restaurant.getPhone());
@@ -19,6 +20,8 @@ public class Admin extends User{
 		super(name, surname, address, phone,password);
 		setID_admin(count);
 		this.restaurant = new Restaurant(String.valueOf(count),new Address("","","",""),new Phone("",""));
+		//when first time we create an admin type of user we have to add an Restaurant object associated with it.
+		//so that when admin enters the system it is easy for us to connect its restaurant.
 
 	}
 	public int getID_admin() {
@@ -38,11 +41,10 @@ public class Admin extends User{
 		return "getName()=" + getName() + ", getSurname()=" + getSurname()
 		+ ", getAddress()=" + getAddress().toString() + ", getPhone()=" + getPhone().toString() + ", password= "+ getPassword();
 	}
+	//create admin method helps us add the admin into the array list.
 	public void createAdmin(Admin ad, ArrayList<Admin> a) {
-	
 			a.add(ad);
 			count++;
-	
 	}
 
 

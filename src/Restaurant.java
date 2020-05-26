@@ -7,7 +7,7 @@ public class Restaurant {
 	private Phone phone;
 	private ArrayList<Food> food = new ArrayList<Food>(); 
 	private BoundedQueue customerQueue = new BoundedQueue();
-	private boolean shutDown = false;
+	private boolean shutDown = false;//starts with false but admin can change it when s/he wanted.
 	public Restaurant(String restaurant_name, Address address, Phone phone) {
 		this.restaurant_name = restaurant_name;
 		this.ship_min = ship_min;
@@ -82,13 +82,11 @@ public class Restaurant {
 	public void setShutDown(boolean shutDown) {
 		this.shutDown = shutDown;
 	}
-	public Food FindFood(Restaurant r ,String s)
-	{ 
+	//finds the desired food from the restaurant
+	public Food FindFood(Restaurant r ,String s){ 
 		
 		for (int i = 0; i < r.getFood().size(); i++) {
-			
-			if(s.equals(r.getFood().get(i).getFood_name()))
-			{
+			if(s.equals(r.getFood().get(i).getFood_name())){
 				return r.getFood().get(i);
 			}
 			

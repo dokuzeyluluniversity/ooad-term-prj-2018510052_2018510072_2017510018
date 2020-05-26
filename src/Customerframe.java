@@ -56,7 +56,11 @@ public class Customerframe extends JFrame {
 	private JTextField food;
 	DefaultTableModel model;
 	private JTable table_2;
-
+	
+	
+	//this class mainly used for customer's options. when this class called, the system shows 4 panels(Display Orders, Display Food, All Foods, Search Food)
+	//and a menu bar contains 2 options such as set user info and log out. set user info done in different class called SetCustomerInfo
+	//the classes that has frames inside it designed with WindowBuilder Editor so we mostly edited the action performed part of the code.
 	public Customerframe(ArrayList<Admin> aList,ArrayList<Food> fList,ArrayList<Customer> cList,Customer c) {
 
 		setTitle("Customer");
@@ -81,15 +85,12 @@ public class Customerframe extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null},
-				},
-				new String[] {
-						"Food Name", "Restaurant Name", "Price"
-				}
-				));
-
-
+			new Object[][] {
+			},
+			new String[] {
+				"Food Name", "Restaurant Name", "Price"
+			}
+		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(159);
 		table.getColumnModel().getColumn(1).setPreferredWidth(184);
 		table.getColumnModel().getColumn(2).setPreferredWidth(97);
@@ -104,40 +105,41 @@ public class Customerframe extends JFrame {
 		scrollPane_1.setBounds(15, 16, 426, 150);
 		panel_1.add(scrollPane_1);
 
+		//at this part of the code we prepared a 2D array for JTable. each row contains the food name, ingredient, price and the restaurant that makes the food.
 		String [][] allfood=new String[fList.size()][4];
-
 		for (int i = 0; i < allfood.length  ; i++) {
-
 			allfood[i]=fList.get(i).toString().split("-");
-		
 		}
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 		table_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		table_1.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] {
-						"Food Name","Ingredients","Price","Restaurant Name"
-		}
-				));
+		table_1.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Food Name","Ingredients","Price","Restaurant Name"}));
 
 		table_1.getColumnModel().getColumn(0).setPreferredWidth(153);
 		table_1.getColumnModel().getColumn(1).setPreferredWidth(167);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(120);
 		scrollPane_1.setViewportView(table_1);
+		
+		//Display button shows the customer the food s/he ordered before. each time s/he order a food she can press the button and 
+		//see if his/her order received from the restaurant
 		JButton btnNewButton_1 = new JButton("Display");
 		btnNewButton_1.setBounds(168, 171, 115, 29);
 		panel.add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				//loop for printing all of the foods the foods s/he ordered before.
 				for (int j = 0; j < c.getOrders().size(); j++) {
 					DefaultTableModel model2 = (DefaultTableModel) table.getModel();
+					//adding rows to the JTable
 					model2.addRow(((Food)c.getOrders().get(j)).toString().split("-"));
 				}
 
 			}
 		});
-		JButton btnNewButton = new JButton("G\u0131ve Order");
+		
+		
+		//Give order button helps user to 
+		JButton btnNewButton = new JButton("Give Order");
 		btnNewButton.setBounds(181, 171, 115, 29);
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -145,27 +147,26 @@ public class Customerframe extends JFrame {
 
 				try {
 					int selectedRow = table_1.getSelectedRow();
+					//loop to search all of the restaurants
 					for (int i = 0; i < aList.size(); i++) {
-						
+						//finding the restaurants name from the admin list we have
 						if(((String)table_1.getValueAt(selectedRow, 3)).trim().equals(aList.get(i).getRestaurant().getRestaurant_name().trim())) {
 							Management m = new Management();
+							//updating the Orders.txt 
 							m.selectfile(m.findAdminid(aList.get(i).getPhone().getNumber(), aList.get(i).getPassword())+";"+m.findcustomerid(c.getPhone().getNumber(), c.getPassword())+";"+
 									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 3)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2)+";"+false, 5);
-							
+							//adding customer to the restaurant's customer array list
 							aList.get(i).getRestaurant().setCustomerqueue(c);
-							
+							//adding food to the customers previous orders.
 							c.setOrders(aList.get(i).getRestaurant().FindFood(aList.get(i).getRestaurant(), food.getText()));
-							JOptionPane.showMessageDialog(getContentPane(),	"Your order has been received!");
-							
+							//showing user that the food is ordered
+							JOptionPane.showMessageDialog(getContentPane(),	"Your order has been received!", "ORDER", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else {
-							System.out.println(aList.get(i).getRestaurant().getRestaurant_name()+"      "+table_1.getValueAt(selectedRow, 3));
-						}
-
 					}
 
 				} catch (Exception e1) {
-
+					//showing information box to the user if s/he have not choose a row before ordering
+					JOptionPane.showMessageDialog(getContentPane(),	"You should select a row to order.", "WARNING", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -187,13 +188,14 @@ public class Customerframe extends JFrame {
 
 			}
 		});
-
+		//set user info done in different class called SetCustomerInfo
 		mnýtmSetUserInformation = new JMenuItem("Set User Information");
 		mnNewMenu.add(mnýtmSetUserInformation);
 		mnýtmSetUserInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//making SetCustomerInfo frame visible
 				SetCustomerInfo sc=new SetCustomerInfo(c);
+				//making current frame's visibility false.
 				setVisible(false);
 				sc.setVisible(true);
 				
@@ -219,7 +221,7 @@ public class Customerframe extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Boolean flag=false;
-
+				//searching for the desired food in desired budget.
 				for (int i = 0; i < allfood.length; i++) {
 
 					if(Integer.valueOf(budget.getText())>=Integer.valueOf(allfood[i][2])&&food.getText().equals(allfood[i][0])) {
@@ -227,10 +229,9 @@ public class Customerframe extends JFrame {
 						model = (DefaultTableModel) table_1.getModel();
 						model.addRow(new Object[]{food.getText(), allfood[i][1],allfood[i][2], allfood[i][3]});
 					}
-
 				}
-
 				if(flag==false) {
+					//clearing the text fields and showing an information box to the user because of no output.
 					food.setText("");budget.setText("");
 					JOptionPane.showMessageDialog(getContentPane(),	"Not Found!");
 				}
@@ -263,7 +264,7 @@ public class Customerframe extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(6, 18, 343, 169);
 		panel_3.add(scrollPane_2);
-
+		//showing all food in the JTable
 		table_2 = new JTable();
 		table_2.setModel(new DefaultTableModel(
 				allfood,
