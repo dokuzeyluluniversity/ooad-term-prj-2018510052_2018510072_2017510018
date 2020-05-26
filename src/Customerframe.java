@@ -25,23 +25,8 @@ import java.awt.event.ActionEvent;
 
 public class Customerframe extends JFrame {
 
-	
-	private  JFrame  Restaurantlist;
-	private  JFrame SetCustomerInfo;
-	private  JFrame GiveOrder;
-	private JPanel contentPane2;
-	private JPanel contentPane1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JLabel lblDescription;
-	private JTextField textField_8;
-	
+
+
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
@@ -56,8 +41,8 @@ public class Customerframe extends JFrame {
 	private JTextField food;
 	DefaultTableModel model;
 	private JTable table_2;
-	
-	
+
+
 	//this class mainly used for customer's options. when this class called, the system shows 4 panels(Display Orders, Display Food, All Foods, Search Food)
 	//and a menu bar contains 2 options such as set user info and log out. set user info done in different class called SetCustomerInfo
 	//the classes that has frames inside it designed with WindowBuilder Editor so we mostly edited the action performed part of the code.
@@ -85,12 +70,12 @@ public class Customerframe extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Food Name", "Restaurant Name", "Price"
-			}
-		));
+				new Object[][] {
+				},
+				new String[] {
+						"Food Name", "Restaurant Name", "Price"
+				}
+				));
 		table.getColumnModel().getColumn(0).setPreferredWidth(159);
 		table.getColumnModel().getColumn(1).setPreferredWidth(184);
 		table.getColumnModel().getColumn(2).setPreferredWidth(97);
@@ -119,7 +104,7 @@ public class Customerframe extends JFrame {
 		table_1.getColumnModel().getColumn(1).setPreferredWidth(167);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(120);
 		scrollPane_1.setViewportView(table_1);
-		
+
 		//Display button shows the customer the food s/he ordered before. each time s/he order a food she can press the button and 
 		//see if his/her order received from the restaurant
 		JButton btnNewButton_1 = new JButton("Display");
@@ -136,8 +121,8 @@ public class Customerframe extends JFrame {
 
 			}
 		});
-		
-		
+
+
 		//Give order button helps user to 
 		JButton btnNewButton = new JButton("Give Order");
 		btnNewButton.setBounds(181, 171, 115, 29);
@@ -191,14 +176,14 @@ public class Customerframe extends JFrame {
 		//set user info done in different class called SetCustomerInfo
 		SetUserInformation = new JMenuItem("Set User Information");
 		mnNewMenu.add(SetUserInformation);
-	SetUserInformation.addActionListener(new ActionListener() {
+		SetUserInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//making SetCustomerInfo frame visible
 				SetCustomerInfo sc=new SetCustomerInfo(c);
 				//making current frame's visibility false.
 				setVisible(false);
 				sc.setVisible(true);
-				
+
 			}
 		});
 		JPanel panel_2 = new JPanel();
@@ -274,7 +259,7 @@ public class Customerframe extends JFrame {
 				));
 		scrollPane_2.setViewportView(table_2);
 	}
-	
-	
+
+
 
 }
