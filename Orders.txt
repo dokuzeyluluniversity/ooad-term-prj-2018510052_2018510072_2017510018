@@ -1,10 +1,9 @@
 2;1;pizza;sucuk,zeytin,yesil biber;24;false
-2;1;makarna;irem pastanesi ;25;false
-2;1;lahmacun;güllüoğlu ;20;true
-
-3;1;Çemenli;börekçi ;3;false
-4;2;Kebap;dürümcü ;18;false
-5;2;Su Böreği;sarıyer börekçisi ;10;false
-6;3;Tavuk Pilav;3E cafe ;11;false
-1;4;makarna;irem pastanesi ;25;false
-4;5;Kebap;dürümcü ;18;false
+2;1;makarna;makarna,sos paketi ;25;false
+2;1;lahmacun;kÄ±yma,lavas,acÄ± biber;20;true
+3;1;Ã‡emenli;hamur,Ã§emen ;3;false
+4;2;Kebap;kÄ±yma,acÄ± biber,lavas ;18;false
+5;2;Su BÃ¶regi;yufka,peynir ;10;false
+6;3;Tavuk Pilav;pirinÃ§,tavuk;11;false
+1;4;makarna;makarna,sos paketi;25;false
+4;5;Kebap;kÄ±yma,acÄ± biber,lavas ;18;false
