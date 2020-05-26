@@ -49,8 +49,8 @@ public class Customerframe extends JFrame {
 	private JPanel panel_1;
 	private JScrollPane scrollPane_1;
 	private JMenuBar Settings;
-	private JMenuItem mnýtmLogout;
-	private JMenuItem mnýtmSetUserInformation;
+	private JMenuItem mnÃ½tmLogout;
+	private JMenuItem mnÃ½tmSetUserInformation;
 	private JMenu mnNewMenu;
 	private JTextField budget;
 	private JTextField food;
@@ -154,7 +154,7 @@ public class Customerframe extends JFrame {
 							Management m = new Management();
 							//updating the Orders.txt 
 							m.selectfile(m.findAdminid(aList.get(i).getPhone().getNumber(), aList.get(i).getPassword())+";"+m.findcustomerid(c.getPhone().getNumber(), c.getPassword())+";"+
-									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 3)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2)+";"+false, 5);
+									table_1.getValueAt(selectedRow, 0)+";"+((String)table_1.getValueAt(selectedRow, 1)).replace("[", "").replace("]", "") +";"+table_1.getValueAt(selectedRow, 2)+";"+false, 5);
 							//adding customer to the restaurant's customer array list
 							aList.get(i).getRestaurant().setCustomerqueue(c);
 							//adding food to the customers previous orders.
@@ -178,9 +178,9 @@ public class Customerframe extends JFrame {
 		mnNewMenu = new JMenu("Settings");
 		Settings.add(mnNewMenu);
 
-		mnýtmLogout = new JMenuItem("LogOut");
-		mnNewMenu.add(mnýtmLogout);
-		mnýtmLogout.addActionListener(new ActionListener() {
+		mnÃ½tmLogout = new JMenuItem("LogOut");
+		mnNewMenu.add(mnÃ½tmLogout);
+		mnÃ½tmLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				Login l =new Login();
@@ -189,9 +189,9 @@ public class Customerframe extends JFrame {
 			}
 		});
 		//set user info done in different class called SetCustomerInfo
-		mnýtmSetUserInformation = new JMenuItem("Set User Information");
-		mnNewMenu.add(mnýtmSetUserInformation);
-		mnýtmSetUserInformation.addActionListener(new ActionListener() {
+		mnÃ½tmSetUserInformation = new JMenuItem("Set User Information");
+		mnNewMenu.add(mnÃ½tmSetUserInformation);
+		mnÃ½tmSetUserInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//making SetCustomerInfo frame visible
 				SetCustomerInfo sc=new SetCustomerInfo(c);
