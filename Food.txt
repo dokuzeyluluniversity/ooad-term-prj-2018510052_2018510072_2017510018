@@ -1,24 +1,24 @@
-1-makarna-kÄ±yma,yaÄŸ,tuz-25-false
-1-lahmacun-kÄ±yma,yaÄŸ,tuz-30-true
-1-salÃ§alÄ± makarna-salÃ§a,yaÄŸ,tuz-15-false
-1-alfredo soslu makarna-alfredo sos,yaÄŸ,tuz-45-false
-1-pizza-sucuk,zeytin,yeÅŸil biber-35-false
-2-makarna-kÄ±yma,yaÄŸ,tuz-29-true
-2-lahmacun-kÄ±yma,yaÄŸ,tuz-20-false
-2-salÃ§alÄ± makarna-salÃ§a,yaÄŸ,tuz-15-false
-2-alfredo soslu makarna-alfredo sos,yaÄŸ,tuz-12-true
-2-pizza-sucuk,zeytin,yeÅŸil biber-24-true
+1-makarna-kiyma,yag,tuz-25-false
+1-lahmacun-kiyma,tuz-30-true
+1-salcali makarna-salca,yag,tuz-15-false
+1-alfredo soslu makarna-alfredo sos,yag,tuz-45-false
+1-pizza-sucuk,zeytin,yesil biber-35-false
+2-makarna-kiyma,yag,tuz-29-true
+2-lahmacun-kiyma,yag,tuz-20-false
+2-salcali makarna-salca,yag,tuz-15-false
+2-alfredo soslu makarna-alfredo sos,yag,tuz-12-true
+2-pizza-sucuk,zeytin,yesil biber-24-true
 2-menemen-domates,yumarta-12-true
 
-4-Kebap-Et,Soğan-18-false
-4-İskender-Et,salça,yoğurt-28-false
-4-Tavuk Döner-Tavuk,Özel Sos,Patates-11-false
-5-Kol Böreği-Kıyma,Soğan,Yufka-8-false
-5-Kaşarlı Börek-Kaşar-5-false
-5-Su Böreği-Peynir,Yufka-10-false
-6-Yengen-Sosis,Ketçap,Turşu-10-false
+4-Kebap-Et,Sogan-18-false
+4-Iskender-Et,salÃ§a,yogurt-28-false
+4-Tavuk DÃ¶ner-Tavuk,Ã–zel Sos,Patates-11-false
+5-Kol BÃ¶regi-Kiyma,Sogan,Yufka-8-false
+5-Kasarli BÃ¶rek-Kasar-5-false
+5-Su BÃ¶regi-Peynir,Yufka-10-false
+6-Yengen-Sosis,KetÃ§ap,TurÃ¾u-10-false
 6-Patso-Patates,sosis-8-false
-6-Tavuk Pilav-Tavuk,Pirinç-11-false
-3-Beyaz Peynirli Börek-Beyaz peynir-7-false
-3-Çemenli-Çemen,domates,kaşar-3-false
+6-Tavuk Pilav-Tavuk,PirinÃ§-11-false
+3-Beyaz Peynirli BÃ¶rek-Beyaz peynir-7-false
+3-Ã‡emenli-Ã‡emen,domates,kasar-3-false
 3-Boyoz-Yufka-5-false
