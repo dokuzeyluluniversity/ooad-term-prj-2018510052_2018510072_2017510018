@@ -6,7 +6,6 @@ public class MAIN {
 			public void run() {
 				try {
 					Login frame = new Login();
-					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
