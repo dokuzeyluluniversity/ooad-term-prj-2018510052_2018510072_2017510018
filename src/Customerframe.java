@@ -49,8 +49,8 @@ public class Customerframe extends JFrame {
 	private JPanel panel_1;
 	private JScrollPane scrollPane_1;
 	private JMenuBar Settings;
-	private JMenuItem mnýtmLogout;
-	private JMenuItem mnýtmSetUserInformation;
+	private JMenuItem Logout;
+	private JMenuItem SetUserInformation;
 	private JMenu mnNewMenu;
 	private JTextField budget;
 	private JTextField food;
@@ -178,9 +178,9 @@ public class Customerframe extends JFrame {
 		mnNewMenu = new JMenu("Settings");
 		Settings.add(mnNewMenu);
 
-		mnýtmLogout = new JMenuItem("LogOut");
-		mnNewMenu.add(mnýtmLogout);
-		mnýtmLogout.addActionListener(new ActionListener() {
+		Logout = new JMenuItem("LogOut");
+		mnNewMenu.add(Logout);
+		Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				Login l =new Login();
@@ -189,9 +189,9 @@ public class Customerframe extends JFrame {
 			}
 		});
 		//set user info done in different class called SetCustomerInfo
-		mnýtmSetUserInformation = new JMenuItem("Set User Information");
-		mnNewMenu.add(mnýtmSetUserInformation);
-		mnýtmSetUserInformation.addActionListener(new ActionListener() {
+		SetUserInformation = new JMenuItem("Set User Information");
+		mnNewMenu.add(SetUserInformation);
+	SetUserInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//making SetCustomerInfo frame visible
 				SetCustomerInfo sc=new SetCustomerInfo(c);
