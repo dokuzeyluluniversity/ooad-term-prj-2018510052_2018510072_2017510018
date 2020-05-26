@@ -86,7 +86,7 @@ public class AdminMenu extends JFrame {
 		customerTable = new JTable();
 		scrollPane.setViewportView(customerTable);
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		customerTable.setModel(new DefaultTableModel(cQueue,new String[] {"Order Name","Restaurant Name","price", "Name", "Surname", "Phone", "Address"}));
+		customerTable.setModel(new DefaultTableModel(cQueue,new String[] {"Order Name","Ingredients","Price", "Name", "Surname", "Phone", "Address"}));
 	
 		//remove customer button works when it is clicked. It doesn't directly remove the customer firstly program asks the admin if s/he really wants to
 		//remove the customer from the line and right after s/he presses yes button system  updates the Orders.txt file, removes the customer from the queue
@@ -261,8 +261,8 @@ public class AdminMenu extends JFrame {
 		mnUser.setFont(new Font("Californian FB", Font.PLAIN, 23));
 		menuBar.add(mnUser);
 		//For set user info part the system opens a new frame from SetAdminInfo and if the admin's info will be changed then the system sends a boolean to specify the option.
-		JMenuItem mnýtmSetUserInfo = new JMenuItem("Set User Information");
-		mnýtmSetUserInfo.addActionListener(new ActionListener() {
+		JMenuItem mnÃ½tmSetUserInfo = new JMenuItem("Set User Information");
+		mnÃ½tmSetUserInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				SetAdminInfo frame = new SetAdminInfo(a,true);
@@ -271,12 +271,12 @@ public class AdminMenu extends JFrame {
 
 			}
 		});
-		mnýtmSetUserInfo.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
-		mnUser.add(mnýtmSetUserInfo);
+		mnÃ½tmSetUserInfo.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
+		mnUser.add(mnÃ½tmSetUserInfo);
 		
 		//For set restaurant info part the system opens a new frame from SetAdminInfo and if the restaurant's info will be changed then the system sends a boolean to specify the option.
-		JMenuItem mnýtmSetRestaurantInformation = new JMenuItem("Set Restaurant Information");
-		mnýtmSetRestaurantInformation.addActionListener(new ActionListener() {
+		JMenuItem mnÃ½tmSetRestaurantInformation = new JMenuItem("Set Restaurant Information");
+		mnÃ½tmSetRestaurantInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SetAdminInfo frame = new SetAdminInfo(a,false);
 				customerTable.removeAll();
@@ -284,15 +284,15 @@ public class AdminMenu extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		mnýtmSetRestaurantInformation.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
-		mnUser.add(mnýtmSetRestaurantInformation);
+		mnÃ½tmSetRestaurantInformation.setIcon(new ImageIcon(AdminMenu.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Background-Color-Black.png")));
+		mnUser.add(mnÃ½tmSetRestaurantInformation);
 		
 		//If the user presses this button the program wants shows a confirm Box to the user because if the restaurant shut down then the user will not enter
 		//the program with his/her password and phone number again. after user clicks the yes button restaurant's isShutDown attribute set to be true and system 
 		//shows a information box to the user about the shut down. and finally the last changes is saved in the Restaurant.txt file and the program closed.
-		JMenuItem mnýtmShutDownRestaurant = new JMenuItem("Shut Down Restaurant");
-		mnýtmShutDownRestaurant.setIcon(new ImageIcon(AdminMenu.class.getResource("/javax/swing/plaf/metal/icons/ocean/warning.png")));
-		mnýtmShutDownRestaurant.addActionListener(new ActionListener() {
+		JMenuItem mnÃ½tmShutDownRestaurant = new JMenuItem("Shut Down Restaurant");
+		mnÃ½tmShutDownRestaurant.setIcon(new ImageIcon(AdminMenu.class.getResource("/javax/swing/plaf/metal/icons/ocean/warning.png")));
+		mnÃ½tmShutDownRestaurant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//showing the user confirm box and take the answer.
 				int response = JOptionPane.showConfirmDialog(getContentPane(), "Do you want to delete your account?", "Confirm?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(AdminMenu.class.getResource("/javax/swing/plaf/metal/icons/ocean/warning.png")));
@@ -317,8 +317,8 @@ public class AdminMenu extends JFrame {
 		});
 		//Log out button helps the user to log out the system. the program just sets the visibility of the current program to false and
 		//sets the Login Frame's visible to true.
-		JMenuItem mnýtmBackToMain = new JMenuItem("LogOut");
-		mnýtmBackToMain.addActionListener(new ActionListener() {
+		JMenuItem mnÃ½tmBackToMain = new JMenuItem("LogOut");
+		mnÃ½tmBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				Login l =new Login();
@@ -326,8 +326,8 @@ public class AdminMenu extends JFrame {
 
 			}
 		});
-		mnUser.add(mnýtmBackToMain);
-		mnUser.add(mnýtmShutDownRestaurant);
+		mnUser.add(mnÃ½tmBackToMain);
+		mnUser.add(mnÃ½tmShutDownRestaurant);
 
 		JLabel lblNewLabel = new JLabel(a.getRestaurant().getRestaurant_name());
 		lblNewLabel.setForeground(new Color(0, 0, 0));
